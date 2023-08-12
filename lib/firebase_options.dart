@@ -31,11 +31,6 @@ class DefaultFirebaseOptions {
           'DefaultFirebaseOptions have not been configured for windows - '
           'you can reconfigure this by running the FlutterFire CLI again.',
         );
-      case TargetPlatform.linux:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for linux - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
       default:
         throw UnsupportedError(
           'DefaultFirebaseOptions are not supported for this platform.',
@@ -67,7 +62,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '782327443672',
     projectId: 'voting-dcc3c',
     storageBucket: 'voting-dcc3c.appspot.com',
-    iosClientId: '782327443672-juma4ap9dao49ddqd0tl4de6bcpvu4m6.apps.googleusercontent.com',
+    iosClientId:
+        '782327443672-juma4ap9dao49ddqd0tl4de6bcpvu4m6.apps.googleusercontent.com',
     iosBundleId: 'yayat.tech.adminVoting',
   );
 
@@ -77,7 +73,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '782327443672',
     projectId: 'voting-dcc3c',
     storageBucket: 'voting-dcc3c.appspot.com',
-    iosClientId: '782327443672-juma4ap9dao49ddqd0tl4de6bcpvu4m6.apps.googleusercontent.com',
+    iosClientId:
+        '782327443672-juma4ap9dao49ddqd0tl4de6bcpvu4m6.apps.googleusercontent.com',
     iosBundleId: 'yayat.tech.adminVoting',
   );
 }

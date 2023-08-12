@@ -73,6 +73,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.17.1"
+  collection_ext:
+    dependency: "direct main"
+    description:
+      name: collection_ext
+      sha256: bf6b6d9417ea8d4624b5fba7788ebbf0030db23a9681add600dd92089ff118c8
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -81,6 +89,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.5"
+  equatable:
+    dependency: transitive
+    description:
+      name: equatable
+      sha256: c2b87cb7756efdf69892005af546c56c0b5037f54d2a88269b4f347a505e3ca2
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.5"
   fake_async:
     dependency: transitive
     description:
@@ -129,6 +145,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.6.0"
+  fl_chart:
+    dependency: "direct main"
+    description:
+      name: fl_chart
+      sha256: c1e26c7e48496be85104c16c040950b0436674cdf0737f3f6e95511b2529b592
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.63.0"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -192,6 +216,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.1"
+  liquid_progress_indicator_v2:
+    dependency: "direct main"
+    description:
+      name: liquid_progress_indicator_v2
+      sha256: "6bb2c675bab4936864a63ccd503be417e407974e11c62711917a4006bb9288b8"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.5.0"
   mask_text_input_formatter:
     dependency: transitive
     description:
@@ -390,6 +422,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.5.1"
+  tuple:
+    dependency: transitive
+    description:
+      name: tuple
+      sha256: a97ce2013f240b2f3807bcbaf218765b6f301c3eff91092bcfa23a039e7dd151
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.2"
   vector_math:
     dependency: transitive
     description:
@@ -415,5 +455,5 @@ packages:
     source: hosted
     version: "1.0.2"
 sdks:
-  dart: ">=3.0.0-0 <4.0.0"
+  dart: ">=3.0.0 <4.0.0"
   flutter: ">=3.3.0"
