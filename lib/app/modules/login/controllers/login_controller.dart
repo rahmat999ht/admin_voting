@@ -44,7 +44,7 @@ class LoginController extends GetxController {
     CollectionReference<Map<String, dynamic>> collection,
   ) async {
     final data = await collection
-        .where('username', isEqualTo: usernameC.text)
+        .where('userName', isEqualTo: usernameC.text)
         .where('pass', isEqualTo: passC.text)
         .get();
     if (data.size == 0) {

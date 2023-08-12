@@ -1,7 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-
 class AdminModel {
   final String? id;
   final String? userName;
@@ -38,6 +36,7 @@ class AdminModel {
       jkl: map['jkl'] != null ? map['jkl'] as String : null,
     );
   }
+
   factory AdminModel.fromDocumentSnapshot(
     DocumentSnapshot<Map<String, dynamic>> data,
   ) =>
