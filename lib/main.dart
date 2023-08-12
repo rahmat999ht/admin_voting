@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'app/core/colors/colors_app.dart';
 import 'app/routes/app_pages.dart';
 import 'firebase_options.dart';
 
@@ -20,6 +21,8 @@ void main() async {
       title: "Application",
       initialRoute: initialRoutes,
       getPages: AppPages.routes,
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(primaryColor: ColorApp.primary),
     ),
   );
 }

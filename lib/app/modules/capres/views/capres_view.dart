@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 
 import '../controllers/capres_controller.dart';
@@ -10,7 +9,7 @@ class CapresView extends GetView<CapresController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('CapresView'),
+        title: const Text('Capres'),
         centerTitle: true,
       ),
       body: const Center(

@@ -10,6 +10,7 @@ abstract class Routes {
   static const DASHBOARD = _Paths.DASHBOARD;
   static const CAPRES = _Paths.CAPRES;
   static const PEMILIH = _Paths.PEMILIH;
+  static const PROFILE = _Paths.PROFILE;
 }
 
 abstract class _Paths {
@@ -19,4 +20,5 @@ abstract class _Paths {
   static const DASHBOARD = '/dashboard';
   static const CAPRES = '/capres';
   static const PEMILIH = '/pemilih';
+  static const PROFILE = '/profile';
 }

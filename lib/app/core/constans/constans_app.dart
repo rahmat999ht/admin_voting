@@ -1,4 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:get/get.dart';
+
+import '../../modules/dashboard/controllers/dashboard_controller.dart';
 
 class ConstansApp {
   static FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -8,5 +11,5 @@ class ConstansApp {
   static String pemilihanCollection = 'pemilihan';
   static String periodePemilihanCollection = 'periodePemilihan';
 
-  // static final idLogin = Get.find<DashboardController>().idLoginUser;
+  static final idLogin = Get.find<DashboardController>().idLoginAdmin;
 }
