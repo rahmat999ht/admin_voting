@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../core/constans/constans_app.dart';
@@ -12,6 +13,24 @@ class PemilihController extends GetxController
   List<PemilihModel> listPemilihModel = [];
   List<PemilihModel> listBelumMemilih = [];
   List<PemilihModel> listSudahMemilih = [];
+
+  final cSearch = TextEditingController();
+  final isSearch = false.obs;
+
+  void onChange(String value) {
+    value.isEmpty ? isSearch.value = false : isSearch.value = true;
+    change(
+      value.isEmpty
+          ? listPemilihModel
+          : listPemilihModel
+              .where((element) => element.stb.toString().toLowerCase().contains(
+                    value.toLowerCase(),
+                  ))
+              .toList(),
+      status: RxStatus.success(),
+    );
+  }
+
   Stream<QuerySnapshot<Map<String, dynamic>>> get getListPemilih =>
       ConstansApp.firestore
           .collection(ConstansApp.pemilihCollection)

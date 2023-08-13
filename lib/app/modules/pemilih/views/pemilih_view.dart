@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:packages/packages.dart';
 
+import '../components/form_search.dart';
+import '../components/penghuni.dart';
 import '../controllers/pemilih_controller.dart';
 
 class PemilihView extends GetView<PemilihController> {
@@ -9,14 +12,32 @@ class PemilihView extends GetView<PemilihController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Pemilih'),
-        centerTitle: true,
+        elevation: 0,
+        toolbarHeight: 70,
+        flexibleSpace: const FormSearch(),
       ),
-      body: const Center(
-        child: Text(
-          'PemilihView is working',
-          style: TextStyle(fontSize: 20),
-        ),
+      body: controller.obx(
+        (state) {
+          return ListView.builder(
+            shrinkWrap: true,
+            itemCount: state!.length,
+            itemBuilder: (
+              context,
+              index,
+            ) {
+              return Pemilih(
+                listPemilih: state,
+                index: index,
+                onTap: () {},
+              );
+            },
+          );
+        },
+        onEmpty: const Center(child: Text("Masih Kosong")),
+        onLoading: const LoadingState(),
+        onError: (e) {
+          return Center(child: Text("error : $e"));
+        },
       ),
     );
   }
