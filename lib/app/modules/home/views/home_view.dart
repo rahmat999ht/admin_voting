@@ -1,3 +1,4 @@
+import 'package:admin_voting/app/core/colors/colors_app.dart';
 import 'package:admin_voting/app/modules/home/components/hasil.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,19 +13,20 @@ class HomeView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home'),
+        elevation: 0,
+        backgroundColor: ColorApp.white,
+        title: Obx(
+          () => PageButton(
+            selectionTab: controller.selectionTab.value,
+            changeSelectionTab: (index) {
+              controller.pageController!.jumpToPage(index);
+            },
+          ),
+        ),
         centerTitle: true,
       ),
       body: Column(
         children: [
-          Obx(
-            () => PageButton(
-              selectionTab: controller.selectionTab.value,
-              changeSelectionTab: (index) {
-                controller.pageController!.jumpToPage(index);
-              },
-            ),
-          ),
           Expanded(
             child: PageView.builder(
               controller: controller.pageController,

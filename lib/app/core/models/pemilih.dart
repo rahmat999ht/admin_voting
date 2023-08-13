@@ -15,9 +15,9 @@ class PemilihModel {
     required this.nama,
     required this.jkl,
     required this.prody,
-    required this.pass,
-    required this.isMemilih,
-    required this.isAktif,
+    this.pass,
+    this.isMemilih,
+    this.isAktif,
   });
 
   Map<String, dynamic> toMap() {
@@ -29,6 +29,27 @@ class PemilihModel {
       'pass': pass,
       'isMemilih': isMemilih,
       'isAktif': isAktif,
+    };
+  }
+
+  Map<String, dynamic> toAdd() {
+    return <String, dynamic>{
+      'stb': stb,
+      'nama': nama,
+      'jkl': jkl,
+      'prody': prody,
+      'pass': pass,
+      'isMemilih': isMemilih,
+      'isAktif': isAktif,
+    };
+  }
+
+  Map<String, dynamic> toUpdate() {
+    return <String, dynamic>{
+      'stb': stb,
+      'nama': nama,
+      'jkl': jkl,
+      'prody': prody,
     };
   }
 

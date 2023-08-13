@@ -11,6 +11,7 @@ abstract class Routes {
   static const CAPRES = _Paths.CAPRES;
   static const PEMILIH = _Paths.PEMILIH;
   static const PROFILE = _Paths.PROFILE;
+  static const FORM_PEMILIH = _Paths.FORM_PEMILIH;
 }
 
 abstract class _Paths {
@@ -21,4 +22,5 @@ abstract class _Paths {
   static const CAPRES = '/capres';
   static const PEMILIH = '/pemilih';
   static const PROFILE = '/profile';
+  static const FORM_PEMILIH = '/form-pemilih';
 }

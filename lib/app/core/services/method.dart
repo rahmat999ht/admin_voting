@@ -6,13 +6,57 @@ import '../models/pemilih.dart';
 import '../models/pemilihan.dart';
 
 class MethodApp {
-  Future addPemilihan(
-    Map<String, dynamic> map, {
-    Map<String, dynamic>? data,
+  Future addPemilihan({
+    required Map<String, dynamic> data,
   }) async {
     await ConstansApp.firestore
         .collection(ConstansApp.pemilihanCollection)
-        .add(data!);
+        .add(data);
+  }
+
+  Future addPemilih({
+    required Map<String, dynamic> data,
+  }) async {
+    await ConstansApp.firestore
+        .collection(ConstansApp.pemilihCollection)
+        .add(data);
+  }
+
+  Future updatePemilih({
+    required String idPemilih,
+    required Map<String, dynamic> data,
+  }) async {
+    await ConstansApp.firestore
+        .collection(ConstansApp.pemilihCollection)
+        .doc(idPemilih)
+        .update(data);
+  }
+
+  Future deletePemilih({
+    required String idPemilih,
+  }) async {
+    await ConstansApp.firestore
+        .collection(ConstansApp.pemilihCollection)
+        .doc(idPemilih)
+        .delete();
+  }
+
+  Future addCapres({
+    required Map<String, dynamic> data,
+  }) async {
+    await ConstansApp.firestore
+        .collection(ConstansApp.capresCollection)
+        .add(data);
+  }
+
+  Future updateCapres({
+    String? idCapres,
+    Map<String, dynamic>? data,
+  }) async {
+    await ConstansApp.firestore
+        .collection(ConstansApp.capresCollection)
+        .doc(idCapres)
+        .update(data!);
   }
 
   DocumentReference<PemilihModel> pemilih(String idPemilih) {

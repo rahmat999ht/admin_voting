@@ -1,5 +1,9 @@
+import 'package:admin_voting/app/core/colors/colors_app.dart';
+import 'package:admin_voting/app/core/models/pemilih.dart';
+import 'package:admin_voting/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:packages/packages.dart';
 
 import '../components/form_search.dart';
@@ -12,6 +16,7 @@ class PemilihView extends GetView<PemilihController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: ColorApp.white,
         elevation: 0,
         toolbarHeight: 70,
         flexibleSpace: const FormSearch(),
@@ -25,10 +30,22 @@ class PemilihView extends GetView<PemilihController> {
               context,
               index,
             ) {
+              final PemilihModel dataPemilih = state[index];
               return Pemilih(
                 listPemilih: state,
                 index: index,
-                onTap: () {},
+                onTap: () {
+                  Get.toNamed(
+                    Routes.FORM_PEMILIH,
+                    arguments: dataPemilih,
+                  );
+                },
+                onLongTap: () {
+                  controller.alertPemilih(dataPemilih);
+                },
+                onTapDelete: () {
+                  controller.alertDeletePemilih(dataPemilih);
+                },
               );
             },
           );
@@ -38,6 +55,18 @@ class PemilihView extends GetView<PemilihController> {
         onError: (e) {
           return Center(child: Text("error : $e"));
         },
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          Get.toNamed(Routes.FORM_PEMILIH);
+        },
+        label: Row(
+          children: [
+            const Icon(LineIcons.plus),
+            8.sW,
+            const Text('Pemilih'),
+          ],
+        ),
       ),
     );
   }

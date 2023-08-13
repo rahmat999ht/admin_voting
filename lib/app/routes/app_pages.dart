@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import '../modules/capres/views/capres_view.dart';
 import '../modules/dashboard/bindings/dashboard_binding.dart';
 import '../modules/dashboard/views/dashboard_view.dart';
+import '../modules/form_pemilih/bindings/form_pemilih_binding.dart';
+import '../modules/form_pemilih/views/form_pemilih_view.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
@@ -48,6 +50,11 @@ class AppPages {
       name: _Paths.PROFILE,
       page: () => const ProfileView(),
       binding: DashboardBinding(),
+    ),
+    GetPage(
+      name: _Paths.FORM_PEMILIH,
+      page: () => const FormPemilih(),
+      binding: FormPemilihBinding(),
     ),
   ];
 }

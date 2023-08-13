@@ -66,6 +66,7 @@ class Presentasi extends GetView<HomeController> {
                       ),
                     ),
                   ),
+                  30.sH,
                   CardStatistik(
                     dataSemuaPemilihan: state,
                     dataSemuaCapres: stateHome,
