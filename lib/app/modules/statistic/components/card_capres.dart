@@ -39,14 +39,21 @@ class CardCapresPV extends StatelessWidget {
               ),
             ),
             5.sH,
-            ClipOval(
-              child: Image.network(
-                "${data.foto}",
-                fit: BoxFit.cover,
+            if (data.foto == null)
+              const SizedBox(
                 height: 70,
                 width: 70,
+                child: CircleAvatar(),
+              )
+            else
+              ClipOval(
+                child: Image.network(
+                  "${data.foto}",
+                  fit: BoxFit.cover,
+                  height: 70,
+                  width: 70,
+                ),
               ),
-            ),
             5.sH,
             Card(
               color: colors,

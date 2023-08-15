@@ -1,6 +1,13 @@
+import 'package:admin_voting/app/modules/capres/components/form_search.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:line_icons/line_icons.dart';
+import 'package:packages/packages.dart';
 
+import '../../../core/colors/colors_app.dart';
+import '../../../core/models/capres.dart';
+import '../../../routes/app_pages.dart';
+import '../components/capres.dart';
 import '../controllers/capres_controller.dart';
 
 class CapresView extends GetView<CapresController> {
@@ -9,13 +16,62 @@ class CapresView extends GetView<CapresController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Capres'),
-        centerTitle: true,
+        backgroundColor: ColorApp.white,
+        elevation: 0,
+        toolbarHeight: 70,
+        flexibleSpace: const FormSearchCapres(),
       ),
-      body: const Center(
-        child: Text(
-          'CapresView is working',
-          style: TextStyle(fontSize: 20),
+      body: controller.obx(
+        (state) {
+          return ListView.builder(
+            shrinkWrap: true,
+            itemCount: state!.length,
+            itemBuilder: (
+              context,
+              index,
+            ) {
+              final CapresModel dataCapres = state[index];
+              return Capres(
+                listCapres: state,
+                index: index,
+                onTap: () {
+                  Get.toNamed(
+                    Routes.FORM_CAPRES,
+                    arguments: {
+                      'data': dataCapres,
+                      'length': controller.lengthCapres,
+                    },
+                  );
+                },
+                onTapDelete: () {
+                  controller.alertDeleteCapres(dataCapres);
+                },
+              );
+            },
+          );
+        },
+        onEmpty: const Center(child: Text("Masih Kosong")),
+        onLoading: const LoadingState(),
+        onError: (e) {
+          return Center(child: Text("error : $e"));
+        },
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          Get.toNamed(
+            Routes.FORM_CAPRES,
+            arguments: {
+              'data': null,
+              'length': controller.lengthCapres,
+            },
+          );
+        },
+        label: Row(
+          children: [
+            const Icon(LineIcons.plus),
+            8.sW,
+            const Text('Capres'),
+          ],
         ),
       ),
     );

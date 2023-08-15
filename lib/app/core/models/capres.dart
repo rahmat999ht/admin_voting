@@ -17,19 +17,45 @@ class CapresModel {
   CapresModel({
     this.id,
     required this.stb,
-    required this.noUrut,
-    required this.foto,
+    this.noUrut,
+    this.foto,
     required this.nama,
     required this.jkl,
     required this.prody,
     required this.visi,
     required this.misi,
-    required this.pass,
+    this.pass,
   });
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'id': id,
+      'stb': stb,
+      'noUrut': noUrut,
+      // 'foto': foto,
+      'nama': nama,
+      'jkl': jkl,
+      'prody': prody,
+      'visi': visi,
+      'misi': misi,
+      'pass': pass,
+    };
+  }
+
+  Map<String, dynamic> toAdd() {
+    return <String, dynamic>{
+      'stb': stb,
+      'noUrut': noUrut,
+      'nama': nama,
+      'jkl': jkl,
+      'prody': prody,
+      'visi': visi,
+      'misi': misi,
+      'pass': pass,
+    };
+  }
+
+  Map<String, dynamic> toAddImage() {
+    return <String, dynamic>{
       'stb': stb,
       'noUrut': noUrut,
       'foto': foto,
@@ -42,13 +68,36 @@ class CapresModel {
     };
   }
 
+  Map<String, dynamic> toUpdate() {
+    return <String, dynamic>{
+      'stb': stb,
+      'nama': nama,
+      'jkl': jkl,
+      'prody': prody,
+      'visi': visi,
+      'misi': misi,
+    };
+  }
+
+  Map<String, dynamic> toUpdateImage() {
+    return <String, dynamic>{
+      'stb': stb,
+      'foto': foto,
+      'nama': nama,
+      'jkl': jkl,
+      'prody': prody,
+      'visi': visi,
+      'misi': misi,
+    };
+  }
+
   factory CapresModel.fromMapById(String id, Map<String, dynamic> map) {
     return CapresModel(
       id: id,
       stb: map['stb'] != null ? map['stb'] as int : null,
       noUrut: map['noUrut'] != null ? map['noUrut'] as String : null,
       // foto: map['foto'] != null
-      //     ? ImageHash.fromMap(map['foto'] as Map<String, dynamic>)
+      //     ? ImageHash.fromMap(map['foto'] as Map<String, String>)
       //     : null,
       foto: map['foto'] != null ? map['foto'] as String : null,
       nama: map['nama'] != null ? map['nama'] as String : null,

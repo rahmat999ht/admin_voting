@@ -8,8 +8,9 @@ import 'package:packages/extensions/size_app.dart';
 import 'package:packages/state/loading.dart';
 
 import '../../pemilih/controllers/pemilih_controller.dart';
+import '../controllers/statistic_controller.dart';
 
-class Hasil extends GetView<HomeController> {
+class Hasil extends GetView<StatisticController> {
   const Hasil({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {

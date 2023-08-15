@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../constans/constans_app.dart';
@@ -59,6 +61,15 @@ class MethodApp {
         .update(data!);
   }
 
+  Future deleteCapres({
+    required String idCapres,
+  }) async {
+    await ConstansApp.firestore
+        .collection(ConstansApp.capresCollection)
+        .doc(idCapres)
+        .delete();
+  }
+
   DocumentReference<PemilihModel> pemilih(String idPemilih) {
     return ConstansApp.firestore
         .collection(ConstansApp.pemilihCollection)
@@ -90,5 +101,20 @@ class MethodApp {
               CapresModel.fromDocumentSnapshot(snapshot),
           toFirestore: (value, options) => value.toMap(),
         );
+  }
+
+  Future<String> uploadWithImage(
+    File file,
+    String uniqName,
+  ) async {
+    const String folder = 'profil';
+    final uploadTask =
+        await ConstansApp.storageRef.child("$folder/$uniqName.jpg").putFile(
+              file,
+              ConstansApp.metadata,
+            );
+    final String urlImage = await uploadTask.ref.getDownloadURL();
+
+    return urlImage;
   }
 }

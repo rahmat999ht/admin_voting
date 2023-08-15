@@ -3,21 +3,21 @@ import 'dart:developer';
 import 'package:admin_voting/app/core/models/admin.dart';
 import 'package:admin_voting/app/modules/capres/views/capres_view.dart';
 import 'package:admin_voting/app/modules/pemilih/views/pemilih_view.dart';
+import 'package:admin_voting/app/modules/statistic/views/statistic_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../core/constans/constans_app.dart';
 import '../../home/views/home_view.dart';
-import '../../profile/views/profile_view.dart';
 
 class DashboardController extends GetxController with StateMixin<AdminModel> {
   final selectedIndex = 0.obs;
   List<Widget> widgetOptions() => [
         const HomeView(),
+        const StatisticView(),
         const CapresView(),
         const PemilihView(),
-        const ProfileView(),
       ];
   String? idLoginAdmin;
   AdminModel? adminModel;

@@ -44,16 +44,20 @@ class BottomNavBar extends StatelessWidget {
                 text: 'Home',
               ),
               GButton(
+                icon: LineIcons.barChartAlt,
+                text: 'Statictik',
+              ),
+              // GButton(
+              //   icon: LineIcons.userEdit,
+              //   text: 'Hasil',
+              // ),
+              GButton(
                 icon: LineIcons.userEdit,
                 text: 'Capres',
               ),
               GButton(
                 icon: LineIcons.userFriends,
                 text: 'Pemilih',
-              ),
-              GButton(
-                icon: LineIcons.user,
-                text: 'Profile',
               ),
             ],
             selectedIndex: selectedIndex,
