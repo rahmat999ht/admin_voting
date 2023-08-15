@@ -33,6 +33,11 @@ class StatisticController extends GetxController
     Colors.red,
     Colors.green,
     Colors.grey,
+    Colors.black26,
+    Colors.white54,
+    Colors.orange,
+    Colors.blueGrey,
+    Colors.amber,
   ];
 
   final controllerCapres = Get.find<CapresController>();

@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:packages/packages.dart';
 
 import '../../../core/models/capres.dart';
 import '../../../core/models/pemilih_capres.dart';
@@ -24,37 +25,46 @@ class CardStatistik extends GetView<PemilihController> {
   @override
   Widget build(BuildContext context) {
     return controller.obx(
-      (state) => SizedBox(
-        width: Get.width,
-        height: 250,
-        child: Center(
-          child: Obx(
-            () => PieChart(
-              PieChartData(
-                pieTouchData: PieTouchData(
-                  touchCallback: (FlTouchEvent event, pieTouchResponse) {
-                    if (!event.isInterestedForInteractions ||
-                        pieTouchResponse == null ||
-                        pieTouchResponse.touchedSection == null) {
-                      controller.touchedIndex.value = -1;
-                      return;
-                    }
-                    controller.touchedIndex.value =
-                        pieTouchResponse.touchedSection!.touchedSectionIndex;
-                  },
+      (state) {
+        final listPemilihAktif =
+            state!.where((e) => e.isAktif == true).toList();
+        return SizedBox(
+          width: Get.width,
+          height: 250,
+          child: Center(
+            child: Obx(
+              () => PieChart(
+                PieChartData(
+                  pieTouchData: PieTouchData(
+                    touchCallback: (FlTouchEvent event, pieTouchResponse) {
+                      if (!event.isInterestedForInteractions ||
+                          pieTouchResponse == null ||
+                          pieTouchResponse.touchedSection == null) {
+                        controller.touchedIndex.value = -1;
+                        return;
+                      }
+                      controller.touchedIndex.value =
+                          pieTouchResponse.touchedSection!.touchedSectionIndex;
+                    },
+                  ),
+                  borderData: FlBorderData(
+                    show: false,
+                  ),
+                  sectionsSpace: 0,
+                  startDegreeOffset: -25,
+                  centerSpaceRadius: 50,
+                  sections: showingSections(listPemilihAktif.length),
                 ),
-                borderData: FlBorderData(
-                  show: false,
-                ),
-                sectionsSpace: 0,
-                startDegreeOffset: -25,
-                centerSpaceRadius: 50,
-                sections: showingSections(state!.length),
               ),
             ),
           ),
-        ),
-      ),
+        );
+      },
+      onEmpty: const Center(child: Text("Masih Kosong")),
+      onLoading: const LoadingState(),
+      onError: (e) {
+        return Center(child: Text("error : $e"));
+      },
     );
   }
 

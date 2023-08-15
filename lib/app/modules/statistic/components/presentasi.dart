@@ -23,7 +23,7 @@ class Presentasi extends GetView<StatisticController> {
           return controller.controllerCapres.obx(
             (stateHome) {
               final totalPemilih =
-                  controller.controllerPemilih.listPemilihModel.length;
+                  controller.controllerPemilih.listPemilihAktif.length;
               final listPemilihCapres = <PemilihCapresModel>[];
               for (int index = 0; index < stateHome!.length; index++) {
                 final dataPemilihanCapres = state!
