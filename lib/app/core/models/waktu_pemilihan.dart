@@ -24,7 +24,7 @@ class WaktuPemModel {
 
   factory WaktuPemModel.fromMapById(String id, Map<String, dynamic> map) {
     return WaktuPemModel(
-      id: map['id'] != null ? map['id'] as String : null,
+      id: id,
       isAktif: map['isAktif'] as bool,
       waktuMulai: map['waktuMulai'] as Timestamp,
       waktuSelesai: map['waktuSelesai'] as Timestamp,
