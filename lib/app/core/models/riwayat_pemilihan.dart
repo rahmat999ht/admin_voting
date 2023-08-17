@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-class RiwayatPem {
+class RiwayatPemModel {
   final String id;
   final String periodeTahun;
   final List<DataPemilihan> dataPemilihan;
-  RiwayatPem({
+  RiwayatPemModel({
     required this.id,
     required this.periodeTahun,
     required this.dataPemilihan,
@@ -19,8 +19,8 @@ class RiwayatPem {
     };
   }
 
-  factory RiwayatPem.fromMapById(String id, Map<String, dynamic> map) {
-    return RiwayatPem(
+  factory RiwayatPemModel.fromMapById(String id, Map<String, dynamic> map) {
+    return RiwayatPemModel(
       id: id,
       periodeTahun: map['periodeTahun'] as String,
       dataPemilihan: List<DataPemilihan>.from(
@@ -31,10 +31,10 @@ class RiwayatPem {
     );
   }
 
-  factory RiwayatPem.fromJson(
+  factory RiwayatPemModel.fromJson(
     DocumentSnapshot<Map<String, dynamic>> data,
   ) =>
-      RiwayatPem.fromMapById(
+      RiwayatPemModel.fromMapById(
         data.id,
         data.data() as Map<String, dynamic>,
       );

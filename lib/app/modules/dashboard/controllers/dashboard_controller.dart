@@ -19,7 +19,7 @@ class DashboardController extends GetxController with StateMixin<AdminModel> {
         const CapresView(),
         const PemilihView(),
       ];
-  String? idLoginAdmin;
+  String idLoginAdmin = '';
   AdminModel? adminModel;
   late final List<AdminModel> dataAdmin;
   @override
@@ -30,7 +30,7 @@ class DashboardController extends GetxController with StateMixin<AdminModel> {
     log(idLogin!);
     await initData(idLogin);
     selectedIndex.value = 0;
-
+    idLoginAdmin = idLogin;
     super.onInit();
   }
 
@@ -43,7 +43,6 @@ class DashboardController extends GetxController with StateMixin<AdminModel> {
         .toList();
     var dataAminModel = dataAllAdmin.docs.firstWhere((e) => e.id == idLogin);
     adminModel = AdminModel.fromDocumentSnapshot(dataAminModel);
-    idLoginAdmin = adminModel!.id;
     successState(adminModel!);
   }
 

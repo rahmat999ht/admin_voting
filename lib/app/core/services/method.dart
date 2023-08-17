@@ -103,6 +103,17 @@ class MethodApp {
         );
   }
 
+  DocumentReference<Map<String, dynamic>> admin(String idAdmin) {
+    return ConstansApp.firestore
+        .collection(ConstansApp.adminCollection)
+        .doc(idAdmin);
+    // .withConverter(
+    //   fromFirestore: (snapshot, options) =>
+    //       AdminModel.fromDocumentSnapshot(snapshot),
+    //   toFirestore: (value, options) => value.toMap(),
+    // );
+  }
+
   Future<String> uploadWithImage(
     File file,
     String uniqName,
