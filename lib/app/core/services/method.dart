@@ -16,6 +16,14 @@ class MethodApp {
         .add(data);
   }
 
+  Future addWaktuPemilihan({
+    required Map<String, dynamic> data,
+  }) async {
+    await ConstansApp.firestore
+        .collection(ConstansApp.waktuPemilihanCollection)
+        .add(data);
+  }
+
   Future addPemilih({
     required Map<String, dynamic> data,
   }) async {

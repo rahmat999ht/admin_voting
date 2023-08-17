@@ -10,7 +10,11 @@ class ConstansApp {
   static String capresCollection = 'capres';
   static String adminCollection = 'admin';
   static String pemilihanCollection = 'pemilihan';
+  static String waktuPemilihanCollection = 'waktu_pemilihan';
   static String periodePemilihanCollection = 'periodePemilihan';
+
+  static const String dateFormat = 'dd MMMM yyyy';
+  static const String dateTanggalFormat = 'dd/MM/yyyy';
 
   static final storageRef = FirebaseStorage.instance.ref();
 

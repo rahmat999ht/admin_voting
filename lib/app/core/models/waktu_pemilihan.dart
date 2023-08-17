@@ -4,11 +4,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class WaktuPemModel {
   final String? id;
+  final String periode;
   final bool isAktif;
   final Timestamp waktuMulai;
   final Timestamp waktuSelesai;
   WaktuPemModel({
     this.id,
+    required this.periode,
     required this.isAktif,
     required this.waktuMulai,
     required this.waktuSelesai,
@@ -16,6 +18,7 @@ class WaktuPemModel {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
+      'periode': periode,
       'isAktif': isAktif,
       'waktuMulai': waktuMulai,
       'waktuSelesai': waktuSelesai,
@@ -25,13 +28,14 @@ class WaktuPemModel {
   factory WaktuPemModel.fromMapById(String id, Map<String, dynamic> map) {
     return WaktuPemModel(
       id: id,
+      periode: map['periode'] as String,
       isAktif: map['isAktif'] as bool,
       waktuMulai: map['waktuMulai'] as Timestamp,
       waktuSelesai: map['waktuSelesai'] as Timestamp,
     );
   }
 
-  factory WaktuPemModel.fromJson(
+  factory WaktuPemModel.fromDocumentSnapshot(
     DocumentSnapshot<Map<String, dynamic>> data,
   ) =>
       WaktuPemModel.fromMapById(

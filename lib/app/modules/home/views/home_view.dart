@@ -69,17 +69,17 @@ class HomeView extends GetView<HomeController> {
             CardHome(
               title: "Pemilihan",
               icon: LineIcons.plusCircle,
-              onTap: () {},
+              onTap: controller.toFormAddPemilihan,
             ),
             CardHome(
               title: "Control",
               icon: LineIcons.boxOpen,
-              onTap: () {},
+              onTap: controller.toControlPemilihan,
             ),
             CardHome(
               title: "Info",
               icon: LineIcons.infoCircle,
-              onTap: () {},
+              onTap: controller.toInfoApp,
             ),
           ],
         ),

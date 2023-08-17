@@ -1,13 +1,19 @@
 import 'package:get/get.dart';
 
 import '../modules/capres/views/capres_view.dart';
+import '../modules/control_pem/bindings/control_pem_binding.dart';
+import '../modules/control_pem/views/control_pem_view.dart';
 import '../modules/dashboard/bindings/dashboard_binding.dart';
 import '../modules/dashboard/views/dashboard_view.dart';
+import '../modules/form_add_pem/bindings/form_add_pem_binding.dart';
+import '../modules/form_add_pem/views/form_add_pem_view.dart';
 import '../modules/form_capres/bindings/form_capres_binding.dart';
 import '../modules/form_capres/views/form_capres_view.dart';
 import '../modules/form_pemilih/bindings/form_pemilih_binding.dart';
 import '../modules/form_pemilih/views/form_pemilih_view.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/info_app/bindings/info_app_binding.dart';
+import '../modules/info_app/views/info_app_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/pemilih/views/pemilih_view.dart';
@@ -67,6 +73,21 @@ class AppPages {
       name: _Paths.FORM_CAPRES,
       page: () => const FormCapresView(),
       binding: FormCapresBinding(),
+    ),
+    GetPage(
+      name: _Paths.FORM_ADD_PEM,
+      page: () => const FormAddPemView(),
+      binding: FormAddPemBinding(),
+    ),
+    GetPage(
+      name: _Paths.CONTROL_PEM,
+      page: () => const ControlPemView(),
+      binding: ControlPemBinding(),
+    ),
+    GetPage(
+      name: _Paths.INFO_APP,
+      page: () => const InfoAppView(),
+      binding: InfoAppBinding(),
     ),
   ];
 }

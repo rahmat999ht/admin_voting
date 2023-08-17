@@ -133,10 +133,15 @@ class PemilihController extends GetxController
       if (event.size != 0) {
         listPemilihModel = List.generate(
           event.docs.length,
-          (index) => PemilihModel.fromDocumentSnapshot(event.docs[index]),
+          (index) => PemilihModel.fromDocumentSnapshot(
+            event.docs[index],
+          ),
         ).toList();
-        listPemilihAktif =
-            listPemilihModel.where((e) => e.isAktif == true).toList();
+        listPemilihAktif = listPemilihModel
+            .where(
+              (e) => e.isAktif == true,
+            )
+            .toList();
         listBelumMemilih = listPemilihModel
             .where((e) => e.isMemilih == false && e.isAktif == true)
             .toList();

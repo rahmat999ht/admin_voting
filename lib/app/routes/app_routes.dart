@@ -14,6 +14,9 @@ abstract class Routes {
   static const FORM_PEMILIH = _Paths.FORM_PEMILIH;
   static const FORM_CAPRES = _Paths.FORM_CAPRES;
   static const STATISTIC = _Paths.STATISTIC;
+  static const FORM_ADD_PEM = _Paths.FORM_ADD_PEM;
+  static const CONTROL_PEM = _Paths.CONTROL_PEM;
+  static const INFO_APP = _Paths.INFO_APP;
 }
 
 abstract class _Paths {
@@ -27,4 +30,7 @@ abstract class _Paths {
   static const FORM_PEMILIH = '/form-pemilih';
   static const FORM_CAPRES = '/form-capres';
   static const STATISTIC = '/statistic';
+  static const FORM_ADD_PEM = '/form-add-pem';
+  static const CONTROL_PEM = '/control-pem';
+  static const INFO_APP = '/info-app';
 }
