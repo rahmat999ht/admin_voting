@@ -60,11 +60,9 @@ class CardStatistik extends GetView<PemilihController> {
           ),
         );
       },
-      onEmpty: const Center(child: Text("Masih Kosong")),
+      onEmpty: const EmptyState(),
       onLoading: const LoadingState(),
-      onError: (e) {
-        return Center(child: Text("error : $e"));
-      },
+      onError: (e) => ErrorState(error: e!),
     );
   }
 

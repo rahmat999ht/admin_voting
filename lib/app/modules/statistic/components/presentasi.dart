@@ -52,8 +52,8 @@ class Presentasi extends GetView<StatisticController> {
                       child: Expanded(
                         child: SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
-                          child: Row(children: [
-                            ...List.generate(
+                          child: Row(
+                            children: List.generate(
                               stateHome.length,
                               (index) => CardCapresPV(
                                 data: stateHome[index],
@@ -64,7 +64,7 @@ class Presentasi extends GetView<StatisticController> {
                                 },
                               ),
                             ),
-                          ]),
+                          ),
                         ),
                       ),
                     ),
@@ -79,18 +79,14 @@ class Presentasi extends GetView<StatisticController> {
                 ),
               );
             },
-            onEmpty: const Center(child: Text("Masih Kosong")),
+            onEmpty: const EmptyState(),
             onLoading: const LoadingState(),
-            onError: (e) {
-              return Center(child: Text("pesan error : $e"));
-            },
+            onError: (e) => ErrorState(error: e!),
           );
         },
-        onEmpty: const Center(child: Text("Masih Kosong")),
+        onEmpty: const EmptyState(),
         onLoading: const LoadingState(),
-        onError: (e) {
-          return Center(child: Text("pesan error : $e"));
-        },
+        onError: (e) => ErrorState(error: e!),
       ),
     );
   }

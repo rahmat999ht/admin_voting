@@ -4,8 +4,7 @@ import 'package:admin_voting/app/modules/home/controllers/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:liquid_progress_indicator_v2/liquid_progress_indicator.dart';
-import 'package:packages/extensions/size_app.dart';
-import 'package:packages/state/loading.dart';
+import 'package:packages/packages.dart';
 
 import '../../pemilih/controllers/pemilih_controller.dart';
 import '../controllers/statistic_controller.dart';
@@ -15,7 +14,7 @@ class Hasil extends GetView<StatisticController> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: HasilSementara(),
+      body: ProsesPemilihan(),
     );
   }
 }
@@ -76,8 +75,8 @@ class HasilAkhir extends GetView<HomeController> {
   }
 }
 
-class HasilSementara extends GetView<HomeController> {
-  const HasilSementara({super.key});
+class ProsesPemilihan extends GetView<HomeController> {
+  const ProsesPemilihan({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -86,31 +85,30 @@ class HasilSementara extends GetView<HomeController> {
       (state) {
         final int sudahMemilih = pemilihC.listSudahMemilih.length;
         final int semuaPemilih = state!.length;
-        final double hasilSementara = (sudahMemilih / semuaPemilih) * 100;
-        log(hasilSementara.toString());
+        final double prosesPemilihan = (sudahMemilih / semuaPemilih) * 100;
+        log(prosesPemilihan.toString());
         return Center(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               const Text(
-                'Hasil Sementara',
+                'Pemilihan masih berlangsung',
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 30,
                 ),
               ),
               40.sH,
               _AnimatedLiquidCircularProgressIndicator(
-                value: hasilSementara,
+                value: prosesPemilihan,
               ),
             ],
           ),
         );
       },
-      onEmpty: const Center(child: Text("Masih Kosong")),
+      onEmpty: const EmptyState(),
       onLoading: const LoadingState(),
-      onError: (e) {
-        return Center(child: Text("pesan error : $e"));
-      },
+      onError: (e) => ErrorState(error: e!),
     );
   }
 }
