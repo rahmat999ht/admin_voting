@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:admin_voting/app/core/models/riwayat_pemilihan.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
@@ -43,5 +44,42 @@ class ControlPemController extends GetxController
       }
     });
     super.onInit();
+  }
+
+  void selesaikanPemilihan(
+    String id,
+  ) {
+    // update tabel waktu pemilihan
+    methodApp.updateWaktuPemilihan(
+      idWP: id,
+      data: {
+        'isAktif': false,
+      },
+    );
+
+    // add data di tabel riwayat pemilihan
+    final docCapres1 = methodApp.capres('P3KfoNxdvtFqUwbR9urP');
+    final docCapres2 = methodApp.capres('h7vlv6B98ZcQCU7jE6Uw');
+    final docCapres3 = methodApp.capres('pk3QADckQZfpBLZsSG3L');
+    final data = RiwayatPemModel(
+      periodeTahun: Timestamp.now(),
+      dataPemilihan: [
+        DataPemilihan(
+          idCapres: docCapres1,
+          totalPemilih: 20,
+        ),
+        DataPemilihan(
+          idCapres: docCapres2,
+          totalPemilih: 27,
+        ),
+        DataPemilihan(
+          idCapres: docCapres3,
+          totalPemilih: 37,
+        ),
+      ],
+    ).toMap();
+    methodApp.addRiwayatPemilihan(
+      data: data,
+    );
   }
 }

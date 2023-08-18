@@ -16,12 +16,30 @@ class MethodApp {
         .add(data);
   }
 
+  Future addRiwayatPemilihan({
+    required Map<String, dynamic> data,
+  }) async {
+    await ConstansApp.firestore
+        .collection(ConstansApp.riwayatPemilihanCollection)
+        .add(data);
+  }
+
   Future addWaktuPemilihan({
     required Map<String, dynamic> data,
   }) async {
     await ConstansApp.firestore
         .collection(ConstansApp.waktuPemilihanCollection)
         .add(data);
+  }
+
+  Future updateWaktuPemilihan({
+    required String idWP,
+    required Map<String, dynamic> data,
+  }) async {
+    await ConstansApp.firestore
+        .collection(ConstansApp.waktuPemilihanCollection)
+        .doc(idWP)
+        .update(data);
   }
 
   Future addPemilih({

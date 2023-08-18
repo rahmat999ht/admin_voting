@@ -11,6 +11,7 @@ class ConstansApp {
   static String adminCollection = 'admin';
   static String pemilihanCollection = 'pemilihan';
   static String waktuPemilihanCollection = 'waktu_pemilihan';
+  static String riwayatPemilihanCollection = 'riwayat_pemilihan';
   static String periodePemilihanCollection = 'periodePemilihan';
 
   static const String dateFormat = 'dd MMMM yyyy';

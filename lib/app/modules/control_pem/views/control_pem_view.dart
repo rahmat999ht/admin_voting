@@ -46,6 +46,12 @@ class ControlPemView extends GetView<ControlPemController> {
                 12.sH,
                 if (listWaktuPemilihanAktif.isNotEmpty)
                   cardPeriodeBerlangsung(dataAktif)
+                // InkWell(
+                //   onTap: () {
+                //     controller.selesaikanPemilihan(dataAktif.id!);
+                //   },
+                //   child: cardPeriodeBerlangsung(dataAktif),
+                // )
                 else
                   const Text(
                     'Tidak ada pemilihan yang sedang berlangsung',
