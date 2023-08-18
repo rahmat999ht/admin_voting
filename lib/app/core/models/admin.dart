@@ -32,12 +32,29 @@ class AdminModel {
     };
   }
 
+  Map<String, dynamic> toUpdateImage() {
+    return <String, dynamic>{
+      'foto': foto,
+      'nama': nama,
+      'jkl': jkl,
+      'noHp': noHp,
+    };
+  }
+
+  Map<String, dynamic> toUpdateNoImage() {
+    return <String, dynamic>{
+      'nama': nama,
+      'jkl': jkl,
+      'noHp': noHp,
+    };
+  }
+
   factory AdminModel.fromMapById(
     String id,
     Map<String, dynamic> map,
   ) {
     return AdminModel(
-      id: map['id'] != null ? map['id'] as String : null,
+      id: id,
       foto: map['foto'] != null ? map['foto'] as String : null,
       userName: map['userName'] != null ? map['userName'] as String : null,
       pass: map['pass'] != null ? map['pass'] as String : null,

@@ -8,6 +8,16 @@ import '../models/pemilih.dart';
 import '../models/pemilihan.dart';
 
 class MethodApp {
+  Future updateAdmin({
+    String? idAdmin,
+    Map<String, dynamic>? data,
+  }) async {
+    await ConstansApp.firestore
+        .collection(ConstansApp.adminCollection)
+        .doc(idAdmin)
+        .update(data!);
+  }
+
   Future addPemilihan({
     required Map<String, dynamic> data,
   }) async {

@@ -34,7 +34,7 @@ class PageButton extends StatelessWidget {
               index: 0,
               activeColor: Colors.blue,
               color: Colors.white,
-              title: "Persentasi",
+              title: "Hasil sementara",
             ),
           ),
           Expanded(
@@ -44,7 +44,7 @@ class PageButton extends StatelessWidget {
               activeColor: Colors.blue,
               color: Colors.white,
               index: 1,
-              title: "Hasil",
+              title: "Hasil akhir",
             ),
           ),
         ],

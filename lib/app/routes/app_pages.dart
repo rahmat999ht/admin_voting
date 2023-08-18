@@ -17,6 +17,8 @@ import '../modules/info_app/views/info_app_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/pemilih/views/pemilih_view.dart';
+import '../modules/profile/bindings/profile_binding.dart';
+import '../modules/profile/views/profile_view.dart';
 import '../modules/statistic/views/statistic_view.dart';
 
 // ignore_for_file: constant_identifier_names
@@ -59,11 +61,11 @@ class AppPages {
       page: () => const PemilihView(),
       binding: DashboardBinding(),
     ),
-    // GetPage(
-    //   name: _Paths.PROFILE,
-    //   page: () => const ProfileView(),
-    //   binding: DashboardBinding(),
-    // ),
+    GetPage(
+      name: _Paths.PROFILE,
+      page: () => const ProfileView(),
+      binding: ProfileBinding(),
+    ),
     GetPage(
       name: _Paths.FORM_PEMILIH,
       page: () => const FormPemilih(),

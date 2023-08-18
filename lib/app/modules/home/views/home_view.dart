@@ -193,6 +193,11 @@ class RiwayatPemilihan extends GetView<HomeController> {
                             ),
                             trailing: Text(tanggal),
                           );
+                        } else if (s.connectionState ==
+                            ConnectionState.waiting) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
                         } else {
                           return const Text(
                             'Tidak ada data',
