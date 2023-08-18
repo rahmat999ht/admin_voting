@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:admin_voting/app/modules/statistic/components/detail_capres.dart';
 import 'package:admin_voting/app/modules/statistic/controllers/statistic_controller.dart';
 import 'package:collection_ext/all.dart';
 import 'package:flutter/material.dart';
@@ -60,7 +61,9 @@ class Presentasi extends GetView<StatisticController> {
                                 colors: controller.listColors[index],
                                 persen: listPemilihCapres[index].persen,
                                 onTap: () {
-                                  log('object Capres');
+                                  Get.to(
+                                    DetailCapres(data: stateHome[index]),
+                                  );
                                 },
                               ),
                             ),

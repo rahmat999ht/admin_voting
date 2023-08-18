@@ -11,8 +11,12 @@ class LoginView extends GetView<LoginController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Login'),
-        centerTitle: true,
+        title: Text(
+          'Login Admin',
+          style: TextStyle(color: ColorApp.black),
+        ),
+        elevation: 0,
+        backgroundColor: ColorApp.white.withOpacity(0.1),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -20,6 +24,7 @@ class LoginView extends GetView<LoginController> {
           child: Form(
             key: controller.formKey,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // 20.sH,
                 // const FlutterLogo(size: 120),
@@ -56,6 +61,20 @@ class LoginView extends GetView<LoginController> {
                     text: 'Login',
                     onPressed: controller.login,
                     height: 50,
+                  ),
+                ),
+                30.sH,
+                const Text(
+                  'info : ',
+                  style: TextStyle(
+                    fontSize: 18,
+                  ),
+                ),
+                4.sH,
+                const Text(
+                  'Login menggunakan akun yang sudah di daftarkan oleh panitia',
+                  style: TextStyle(
+                    fontSize: 14,
                   ),
                 ),
               ],

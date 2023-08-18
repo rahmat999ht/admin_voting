@@ -21,6 +21,7 @@ class HomeView extends GetView<HomeController> {
         toolbarHeight: 90,
         backgroundColor: ColorApp.white.withOpacity(0),
         title: const HeaderHome(),
+        actions: logOut,
       ),
       body: controller.obx(
         (state) {
@@ -46,6 +47,34 @@ class HomeView extends GetView<HomeController> {
         onError: (e) => ErrorState(error: e!),
       ),
     );
+  }
+
+  List<Widget> get logOut {
+    return [
+      GestureDetector(
+        onTap: controller.alertLogOut,
+        child: Card(
+          margin: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 26,
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+            side: BorderSide(color: ColorApp.primary),
+          ),
+          child: SizedBox(
+            height: 40,
+            width: 40,
+            child: Center(
+              child: Icon(
+                Icons.logout,
+                color: ColorApp.primary,
+              ),
+            ),
+          ),
+        ),
+      ),
+    ];
   }
 
   Row pemilihanTerakhir(RiwayatPemModel pemilihanTerakhir) {
