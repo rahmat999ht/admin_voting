@@ -24,16 +24,19 @@ class HomeView extends GetView<HomeController> {
       ),
       body: controller.obx(
         (state) {
+          state!.sort(
+            (a, b) => a.periodeTahun.compareTo(b.periodeTahun),
+          );
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               20.sH,
-              pemilihanTerakhir(),
+              pemilihanTerakhir(state.last),
               20.sH,
               cardAction(),
               20.sH,
               Expanded(
-                child: RiwayatPemilihan(state!),
+                child: RiwayatPemilihan(state),
               )
             ],
           );
@@ -45,7 +48,10 @@ class HomeView extends GetView<HomeController> {
     );
   }
 
-  Row pemilihanTerakhir() {
+  Row pemilihanTerakhir(RiwayatPemModel pemilihanTerakhir) {
+    final toDate = pemilihanTerakhir.periodeTahun.toDate();
+    String tanggal = DateFormat('dd MMMM yyyy', "id_ID").format(toDate);
+
     return Row(
       children: [
         20.sW,
@@ -56,7 +62,7 @@ class HomeView extends GetView<HomeController> {
           ),
         ),
         Text(
-          'Pemilihan Terakhir',
+          tanggal,
           style: TextStyle(
             fontSize: 14,
             color: ColorApp.black.withOpacity(0.7),
