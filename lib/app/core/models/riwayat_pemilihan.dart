@@ -32,7 +32,7 @@ class RiwayatPemModel {
     );
   }
 
-  factory RiwayatPemModel.fromJson(
+  factory RiwayatPemModel.fromDocumentSnapshot(
     DocumentSnapshot<Map<String, dynamic>> data,
   ) =>
       RiwayatPemModel.fromMapById(

@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:packages/packages.dart';
 
+import '../../../core/models/riwayat_pemilihan.dart';
 import '../components/card_home.dart';
 import '../components/header_home.dart';
 import '../controllers/home_controller.dart';
@@ -19,16 +20,23 @@ class HomeView extends GetView<HomeController> {
         backgroundColor: ColorApp.white.withOpacity(0),
         title: const HeaderHome(),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          20.sH,
-          pemilihanTerakhir(),
-          20.sH,
-          cardAction(),
-          20.sH,
-          const RiwayatPemilihan()
-        ],
+      body: controller.obx(
+        (state) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              20.sH,
+              pemilihanTerakhir(),
+              20.sH,
+              cardAction(),
+              20.sH,
+              RiwayatPemilihan(state!)
+            ],
+          );
+        },
+        onEmpty: const EmptyState(),
+        onLoading: const LoadingState(),
+        onError: (e) => ErrorState(error: e!),
       ),
     );
   }
@@ -88,27 +96,61 @@ class HomeView extends GetView<HomeController> {
   }
 }
 
-class RiwayatPemilihan extends StatelessWidget {
-  const RiwayatPemilihan({
+class RiwayatPemilihan extends GetView<HomeController> {
+  const RiwayatPemilihan(
+    this.listData, {
     super.key,
   });
 
+  final List<RiwayatPemModel> listData;
+
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             'Riwayat Pemilihan : ',
             style: TextStyle(
               fontSize: 16,
             ),
           ),
-          Divider(
+          const Divider(
             thickness: 2,
           ),
+          if (listData.isEmpty)
+            const Text(
+              'List masih kosong',
+              style: TextStyle(
+                fontSize: 16,
+              ),
+            )
+          else
+            Expanded(
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: listData.length,
+                itemBuilder: (
+                  context,
+                  index,
+                ) {
+                  // final RiwayatPemModel data = listData[index];
+                  return const ListTile(
+                    title: Text(
+                      'data',
+                    ),
+                    subtitle: Text(
+                      'data',
+                    ),
+                    trailing: Text(
+                      'data',
+                    ),
+                  );
+                },
+              ),
+            ),
         ],
       ),
     );
