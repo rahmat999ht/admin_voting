@@ -1,6 +1,8 @@
 import 'package:admin_voting/app/core/colors/colors_app.dart';
+import 'package:admin_voting/app/core/services/method.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:packages/packages.dart';
 
@@ -30,7 +32,9 @@ class HomeView extends GetView<HomeController> {
               20.sH,
               cardAction(),
               20.sH,
-              RiwayatPemilihan(state!)
+              Expanded(
+                child: RiwayatPemilihan(state!),
+              )
             ],
           );
         },
@@ -106,6 +110,9 @@ class RiwayatPemilihan extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
+    listData.sort(
+      (a, b) => a.periodeTahun.compareTo(b.periodeTahun),
+    );
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
@@ -136,18 +143,62 @@ class RiwayatPemilihan extends GetView<HomeController> {
                   context,
                   index,
                 ) {
-                  // final RiwayatPemModel data = listData[index];
-                  return const ListTile(
-                    title: Text(
-                      'data',
-                    ),
-                    subtitle: Text(
-                      'data',
-                    ),
-                    trailing: Text(
-                      'data',
-                    ),
-                  );
+                  MethodApp methodApp = MethodApp();
+                  final RiwayatPemModel data = listData[index];
+                  final periode = data.periodeTahun.toDate();
+
+                  // String jam = DateFormat("HH : mm", "id_ID").format(periode);
+                  String tanggal =
+                      DateFormat('dd MMMM yyyy', "id_ID").format(periode);
+
+                  int maxTotalPemilih = -1;
+                  int maxIndex = -1;
+
+                  for (int i = 0; i < data.dataPemilihan.length; i++) {
+                    if (data.dataPemilihan[i].totalPemilih > maxTotalPemilih) {
+                      maxTotalPemilih = data.dataPemilihan[i].totalPemilih;
+                      maxIndex = i;
+                    }
+                  }
+                  if (maxIndex != -1) {
+                    final dataCapres = data.dataPemilihan[maxIndex];
+                    return StreamBuilder(
+                      stream:
+                          methodApp.capres(dataCapres.idCapres.id).snapshots(),
+                      builder: (ctx, s) {
+                        if (s.hasData) {
+                          final dataCapresTerpilih = s.data!.data()!;
+                          return ListTile(
+                            title: Text(
+                              dataCapresTerpilih.nama!,
+                            ),
+                            subtitle: const Text(
+                              'Bem terpilih',
+                            ),
+                            leading: ClipOval(
+                              child: dataCapresTerpilih.foto == null
+                                  ? const SizedBox(height: 30)
+                                  : Image.network(
+                                      dataCapresTerpilih.foto!,
+                                      height: 40,
+                                      width: 40,
+                                      fit: BoxFit.cover,
+                                    ),
+                            ),
+                            trailing: Text(tanggal),
+                          );
+                        } else {
+                          return const Text(
+                            'Tidak ada data',
+                          );
+                        }
+                      },
+                    );
+                  } else {
+                    return const Text(
+                      'Tidak ada data',
+                    );
+                  }
                 },
               ),
             ),

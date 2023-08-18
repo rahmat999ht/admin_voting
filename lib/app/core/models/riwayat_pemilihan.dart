@@ -58,7 +58,7 @@ class DataPemilihan {
   }
 
   factory DataPemilihan.fromMap(Map<String, dynamic> map) {
-    final dataCapres = map['capres'] as DocumentReference;
+    final dataCapres = map['idCapres'] as DocumentReference;
     DocumentReference<CapresModel> idCapres = dataCapres.withConverter(
       fromFirestore: (snapshot, options) =>
           CapresModel.fromDocumentSnapshot(snapshot),
