@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:admin_voting/app/modules/control_pem/controllers/control_pem_controller.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -41,6 +42,7 @@ class StatisticController extends GetxController
   ];
 
   final controllerCapres = Get.find<CapresController>();
+  final controllerControl = Get.find<ControlPemController>();
   final controllerPemilih = Get.find<PemilihController>();
 
   @override
