@@ -22,13 +22,13 @@ class Presentasi extends GetView<StatisticController> {
         (state) {
           // int totalPemilih = 20;
           return controller.controllerCapres.obx(
-            (stateHome) {
+            (stateCapres) {
               final totalPemilih =
                   controller.controllerPemilih.listPemilihAktif.length;
               final listPemilihCapres = <PemilihCapresModel>[];
-              for (int index = 0; index < stateHome!.length; index++) {
+              for (int index = 0; index < stateCapres!.length; index++) {
                 final dataPemilihanCapres = state!
-                    .where((e) => e.capres!.id == stateHome[index].id)
+                    .where((e) => e.capres!.id == stateCapres[index].id)
                     .toList();
                 final persen =
                     (dataPemilihanCapres.length / totalPemilih) * 100;
@@ -37,7 +37,7 @@ class Presentasi extends GetView<StatisticController> {
                 log('listPemilihCapres $listPemilihCapres');
                 listPemilihCapres.add(
                   PemilihCapresModel(
-                    noUrut: stateHome[index].noUrut!,
+                    noUrut: stateCapres[index].noUrut!,
                     bykPemilih: dataPemilihanCapres.length.toDouble(),
                     persen: stringPersen,
                   ),
@@ -55,14 +55,14 @@ class Presentasi extends GetView<StatisticController> {
                           scrollDirection: Axis.horizontal,
                           child: Row(
                             children: List.generate(
-                              stateHome.length,
+                              stateCapres.length,
                               (index) => CardCapresPV(
-                                data: stateHome[index],
+                                data: stateCapres[index],
                                 colors: controller.listColors[index],
                                 persen: listPemilihCapres[index].persen,
                                 onTap: () {
                                   Get.to(
-                                    DetailCapres(data: stateHome[index]),
+                                    DetailCapres(data: stateCapres[index]),
                                   );
                                 },
                               ),
@@ -74,10 +74,10 @@ class Presentasi extends GetView<StatisticController> {
                     30.sH,
                     CardStatistik(
                       dataSemuaPemilihan: state!,
-                      dataSemuaCapres: stateHome,
+                      dataSemuaCapres: stateCapres,
                       listColor: controller.listColors,
                     ),
-                    listIndokator(stateHome),
+                    listIndokator(stateCapres),
                   ],
                 ),
               );
@@ -94,10 +94,10 @@ class Presentasi extends GetView<StatisticController> {
     );
   }
 
-  Column listIndokator(List<CapresModel> stateHome) {
+  Column listIndokator(List<CapresModel> stateCapres) {
     return Column(
       children: [
-        ...stateHome.mapIndexed((i, e) {
+        ...stateCapres.mapIndexed((i, e) {
           return Padding(
             padding: const EdgeInsets.symmetric(
               vertical: 8.0,
@@ -116,7 +116,7 @@ class Presentasi extends GetView<StatisticController> {
             horizontal: 20,
           ),
           child: Indicator(
-            color: controller.listColors[stateHome.length],
+            color: controller.listColors[stateCapres.length],
             text: 'Belum Memilih',
             isSquare: true,
           ),

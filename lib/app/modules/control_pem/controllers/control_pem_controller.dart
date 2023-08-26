@@ -1,6 +1,10 @@
 import 'dart:developer';
 
 import 'package:admin_voting/app/core/models/riwayat_pemilihan.dart';
+import 'package:admin_voting/app/modules/capres/controllers/capres_controller.dart';
+import 'package:admin_voting/app/modules/dashboard/controllers/dashboard_controller.dart';
+import 'package:admin_voting/app/modules/pemilih/controllers/pemilih_controller.dart';
+import 'package:admin_voting/app/modules/statistic/controllers/statistic_controller.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
@@ -14,6 +18,11 @@ class ControlPemController extends GetxController
 
   List<WaktuPemModel> listWaktuPemilihanModel = <WaktuPemModel>[];
   List<WaktuPemModel> listWaktuPemilihanAktif = <WaktuPemModel>[];
+
+  final staticticC = Get.find<StatisticController>();
+  final capresC = Get.find<CapresController>();
+  final dashC = Get.find<DashboardController>();
+  final pemilihC = Get.find<PemilihController>();
 
   Stream<QuerySnapshot<Map<String, dynamic>>> get getListWaktuPemilihan =>
       ConstansApp.firestore
@@ -46,40 +55,43 @@ class ControlPemController extends GetxController
     super.onInit();
   }
 
-  void selesaikanPemilihan(
-    String id,
-  ) {
+  void selesaikanPemilihan({
+    required String idWaktuPemilihan,
+    required List<DataPemilihan> dataPemilihan,
+  }) {
     // update tabel waktu pemilihan
     methodApp.updateWaktuPemilihan(
-      idWP: id,
+      idWP: idWaktuPemilihan,
       data: {
         'isAktif': false,
       },
     );
+    final sudahMemilih = pemilihC.listSudahMemilih;
+
+    for (int i = 0; i < sudahMemilih.length; i++) {
+      methodApp.updatePemilih(
+        idPemilih: sudahMemilih[i].id!,
+        data: {'isMemilih': false},
+      );
+    }
+
+    final capres = capresC.listCapresModelIsPeriode;
+
+    for (int i = 0; i < capres.length; i++) {
+      methodApp.updateCapres(
+        idCapres: capres[i].id!,
+        data: {'isPeriode': false},
+      );
+    }
 
     // add data di tabel riwayat pemilihan
-    final docCapres1 = methodApp.capres('P3KfoNxdvtFqUwbR9urP');
-    final docCapres2 = methodApp.capres('h7vlv6B98ZcQCU7jE6Uw');
-    final docCapres3 = methodApp.capres('pk3QADckQZfpBLZsSG3L');
     final data = RiwayatPemModel(
       periodeTahun: Timestamp.now(),
-      dataPemilihan: [
-        DataPemilihan(
-          idCapres: docCapres1,
-          totalPemilih: 20,
-        ),
-        DataPemilihan(
-          idCapres: docCapres2,
-          totalPemilih: 27,
-        ),
-        DataPemilihan(
-          idCapres: docCapres3,
-          totalPemilih: 37,
-        ),
-      ],
+      dataPemilihan: dataPemilihan,
     ).toMap();
     methodApp.addRiwayatPemilihan(
       data: data,
     );
+    change(listWaktuPemilihanModel, status: RxStatus.success());
   }
 }

@@ -45,7 +45,7 @@ class HeaderHome extends GetView<DashboardController> {
                 ),
                 12.sW,
                 Text(
-                  'admin : ',
+                  'Admin : ',
                   style: TextStyle(
                     color: ColorApp.black,
                     fontWeight: FontWeight.w300,

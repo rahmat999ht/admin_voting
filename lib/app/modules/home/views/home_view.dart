@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:admin_voting/app/core/colors/colors_app.dart';
 import 'package:admin_voting/app/core/services/method.dart';
 import 'package:flutter/material.dart';
@@ -197,12 +199,18 @@ class RiwayatPemilihan extends GetView<HomeController> {
                   }
                   if (maxIndex != -1) {
                     final dataCapres = data.dataPemilihan[maxIndex];
+                    log(maxIndex.toString(), name: 'maxIndex');
+                    log(dataCapres.idCapres.id.toString(), name: 'capres');
+
                     return StreamBuilder(
                       stream:
                           methodApp.capres(dataCapres.idCapres.id).snapshots(),
                       builder: (ctx, s) {
                         if (s.hasData) {
+                          log(s.data!.toString(), name: 'capres');
+
                           final dataCapresTerpilih = s.data!.data()!;
+
                           return ListTile(
                             title: Text(
                               dataCapresTerpilih.nama!,

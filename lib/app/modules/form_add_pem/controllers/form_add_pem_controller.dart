@@ -72,8 +72,10 @@ class FormAddPemController extends GetxController {
         // Konversi DateTime menjadi Timestamp
         Timestamp tsTglMulai = Timestamp.fromDate(tglMulai);
         Timestamp tsTglBerakhir = Timestamp.fromDate(tglBerakhir);
+        final mulai = (date.year).toString();
+        final berakhir = (date.year + 1).toString();
         final data = WaktuPemModel(
-          periode: date.year.toString(),
+          periode: "$mulai - $berakhir",
           isAktif: true,
           waktuMulai: tsTglMulai,
           waktuSelesai: tsTglBerakhir,

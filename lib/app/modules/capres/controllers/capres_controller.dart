@@ -17,6 +17,7 @@ class CapresController extends GetxController
   int lengthCapres = 0;
 
   List<CapresModel> listCapresModel = [];
+  List<CapresModel> listCapresModelIsPeriode = [];
 
   final cSearch = TextEditingController();
   final isSearch = false.obs;
@@ -59,9 +60,9 @@ class CapresController extends GetxController
   }
 
   void deleteCapres(String id) {
-    methodApp.deleteCapres(
-      idCapres: id,
-    );
+    methodApp.updateCapres(idCapres: id, data: {
+      'isPeriode': false,
+    });
     Get.back();
   }
 
@@ -81,9 +82,11 @@ class CapresController extends GetxController
         listCapresModel.sort(
           (a, b) => a.noUrut!.compareTo(b.noUrut!),
         );
+        listCapresModelIsPeriode =
+            listCapresModel.where((e) => e.isPeriode == true).toList();
         lengthCapres = listCapresModel.length;
         log('${listCapresModel.length}', name: 'Capres');
-        change(listCapresModel, status: RxStatus.success());
+        change(listCapresModelIsPeriode, status: RxStatus.success());
       } else {
         log('Kosong', name: 'Capres');
         change([], status: RxStatus.empty());

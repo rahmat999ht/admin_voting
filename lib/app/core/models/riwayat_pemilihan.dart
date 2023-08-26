@@ -43,7 +43,7 @@ class RiwayatPemModel {
 
 class DataPemilihan {
   final int totalPemilih;
-  final DocumentReference idCapres;
+  final DocumentReference<CapresModel> idCapres;
 
   DataPemilihan({
     required this.totalPemilih,

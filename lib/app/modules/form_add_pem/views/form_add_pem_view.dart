@@ -11,6 +11,9 @@ class FormAddPemView extends GetView<FormAddPemController> {
   const FormAddPemView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final mulai = (controller.date.year).toString();
+    final berakhir = (controller.date.year + 1).toString();
+
     return Scaffold(
       appBar: appBarBack(
         title: 'Tambah periode pemilihan',
@@ -32,7 +35,7 @@ class FormAddPemView extends GetView<FormAddPemController> {
                 ),
                 20.sH,
                 Text(
-                  'periode : ${controller.date.year}',
+                  'periode : $mulai - $berakhir',
                   style: const TextStyle(
                     fontSize: 18,
                   ),

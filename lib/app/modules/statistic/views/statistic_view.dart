@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 
 import '../../../core/colors/colors_app.dart';
+import '../../control_pem/controllers/control_pem_controller.dart';
 import '../components/hasil.dart';
 import '../components/page_button.dart';
 import '../components/presentasi.dart';
@@ -12,6 +12,7 @@ class StatisticView extends GetView<StatisticController> {
   const StatisticView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    Get.lazyPut(() => ControlPemController());
     return Scaffold(
       appBar: AppBar(
         elevation: 0,

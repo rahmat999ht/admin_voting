@@ -8,6 +8,7 @@ import 'package:packages/packages.dart';
 
 import '../../../core/colors/colors_app.dart';
 import '../../../core/models/pemilih_capres.dart';
+import '../../control_pem/controllers/control_pem_controller.dart';
 import '../../pemilih/controllers/pemilih_controller.dart';
 import '../controllers/statistic_controller.dart';
 
@@ -15,6 +16,7 @@ class Hasil extends GetView<StatisticController> {
   const Hasil({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    Get.lazyPut(() => ControlPemController());
     return Scaffold(
       body: controller.controllerControl.obx(
         (stCP) {
