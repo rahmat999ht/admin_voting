@@ -75,14 +75,14 @@ class ControlPemController extends GetxController
       );
     }
 
-    final capres = capresC.listCapresModelIsPeriode;
+    // final capres = capresC.listCapresModelIsPeriode;
 
-    for (int i = 0; i < capres.length; i++) {
-      methodApp.updateCapres(
-        idCapres: capres[i].id!,
-        data: {'isPeriode': false},
-      );
-    }
+    // for (int i = 0; i < capres.length; i++) {
+    //   methodApp.updateCapres(
+    //     idCapres: capres[i].id!,
+    //     data: {'isPeriode': false},
+    //   );
+    // }
 
     // add data di tabel riwayat pemilihan
     final data = RiwayatPemModel(

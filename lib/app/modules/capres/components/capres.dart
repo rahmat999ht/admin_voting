@@ -31,7 +31,12 @@ class Capres extends StatelessWidget {
                   ? const CircleAvatar(
                       child: SizedBox(height: 30),
                     )
-                  : Image.network(capres.foto!, height: 40),
+                  : Image.network(
+                      capres.foto!,
+                      height: 40,
+                      width: 40,
+                      fit: BoxFit.cover,
+                    ),
             ),
             title: Text(
               capres.nama!,
