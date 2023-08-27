@@ -21,72 +21,70 @@ class Presentasi extends GetView<StatisticController> {
       body: controller.obx(
         (state) {
           // int totalPemilih = 20;
-          return Center(
-            child: controller.controllerCapres.obx(
-              (stateHome) {
-                final totalPemilih =
-                    controller.controllerPemilih.listPemilihAktif.length;
-                final listPemilihCapres = <PemilihCapresModel>[];
-                for (int index = 0; index < stateHome!.length; index++) {
-                  final dataPemilihanCapres = state!
-                      .where((e) => e.capres!.id == stateHome[index].id)
-                      .toList();
-                  final persen =
-                      (dataPemilihanCapres.length / totalPemilih) * 100;
-                  final stringPersen = '${persen.toStringAsFixed(2)}%';
-                  log('dataPemilihanCapres $dataPemilihanCapres');
-                  log('listPemilihCapres $listPemilihCapres');
-                  listPemilihCapres.add(
-                    PemilihCapresModel(
-                      noUrut: stateHome[index].noUrut!,
-                      bykPemilih: dataPemilihanCapres.length.toDouble(),
-                      persen: stringPersen,
-                    ),
-                  );
-                }
-                listPemilihCapres.sort(
-                  (a, b) => a.noUrut.compareTo(b.noUrut),
+          return controller.controllerCapres.obx(
+            (stateHome) {
+              final totalPemilih =
+                  controller.controllerPemilih.listPemilihAktif.length;
+              final listPemilihCapres = <PemilihCapresModel>[];
+              for (int index = 0; index < stateHome!.length; index++) {
+                final dataPemilihanCapres = state!
+                    .where((e) => e.capres!.id == stateHome[index].id)
+                    .toList();
+                final persen =
+                    (dataPemilihanCapres.length / totalPemilih) * 100;
+                final stringPersen = '${persen.toStringAsFixed(2)}%';
+                log('dataPemilihanCapres $dataPemilihanCapres');
+                log('listPemilihCapres $listPemilihCapres');
+                listPemilihCapres.add(
+                  PemilihCapresModel(
+                    noUrut: stateHome[index].noUrut!,
+                    bykPemilih: dataPemilihanCapres.length.toDouble(),
+                    persen: stringPersen,
+                  ),
                 );
-                return SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        child: Expanded(
-                          child: SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              children: List.generate(
-                                stateHome.length,
-                                (index) => CardCapresPV(
-                                  data: stateHome[index],
-                                  colors: controller.listColors[index],
-                                  persen: listPemilihCapres[index].persen,
-                                  onTap: () {
-                                    Get.to(
-                                      DetailCapres(data: stateHome[index]),
-                                    );
-                                  },
-                                ),
+              }
+              listPemilihCapres.sort(
+                (a, b) => a.noUrut.compareTo(b.noUrut),
+              );
+              return SingleChildScrollView(
+                child: Column(
+                  children: [
+                    SizedBox(
+                      child: Expanded(
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            children: List.generate(
+                              stateHome.length,
+                              (index) => CardCapresPV(
+                                data: stateHome[index],
+                                colors: controller.listColors[index],
+                                persen: listPemilihCapres[index].persen,
+                                onTap: () {
+                                  Get.to(
+                                    DetailCapres(data: stateHome[index]),
+                                  );
+                                },
                               ),
                             ),
                           ),
                         ),
                       ),
-                      30.sH,
-                      CardStatistik(
-                        dataSemuaPemilihan: state!,
-                        dataSemuaCapres: stateHome,
-                        listColor: controller.listColors,
-                      ),
-                      listIndokator(stateHome),
-                    ],
-                  ),
-                );
-              },
-              onEmpty: const EmptyState(),
-              onLoading: const LoadingState(),
-              onError: (e) => ErrorState(error: e!),
-            ),
+                    ),
+                    30.sH,
+                    CardStatistik(
+                      dataSemuaPemilihan: state!,
+                      dataSemuaCapres: stateHome,
+                      listColor: controller.listColors,
+                    ),
+                    listIndokator(stateHome),
+                  ],
+                ),
+              );
+            },
+            onEmpty: const EmptyState(),
+            onLoading: const LoadingState(),
+            onError: (e) => ErrorState(error: e!),
           );
         },
         onEmpty: const EmptyState(),

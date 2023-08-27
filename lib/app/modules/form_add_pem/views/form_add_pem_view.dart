@@ -1,3 +1,4 @@
+import 'package:admin_voting/app/modules/control_pem/controllers/control_pem_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
@@ -11,6 +12,7 @@ class FormAddPemView extends GetView<FormAddPemController> {
   const FormAddPemView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    Get.lazyPut(() => ControlPemController());
     final mulai = (controller.date.year).toString();
     final berakhir = (controller.date.year + 1).toString();
 

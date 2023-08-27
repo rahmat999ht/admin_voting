@@ -1,4 +1,5 @@
 import 'package:admin_voting/app/modules/capres/components/form_search.dart';
+import 'package:admin_voting/app/modules/statistic/components/detail_capres.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
@@ -35,12 +36,11 @@ class CapresView extends GetView<CapresController> {
                 listCapres: state,
                 index: index,
                 onTap: () {
-                  Get.toNamed(
-                    Routes.FORM_CAPRES,
-                    arguments: {
-                      'data': dataCapres,
-                      'length': controller.lengthCapres,
-                    },
+                  Get.to(
+                    DetailCapres(
+                      data: dataCapres,
+                      lengthCapres: controller.lengthCapres,
+                    ),
                   );
                 },
                 onTapDelete: () {

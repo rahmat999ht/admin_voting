@@ -1,16 +1,18 @@
 import 'dart:developer';
 
+import 'package:admin_voting/app/core/interface/alerts/alert_actions.dart';
+import 'package:admin_voting/app/core/interface/alerts/alert_info.dart';
 import 'package:admin_voting/app/core/models/riwayat_pemilihan.dart';
 import 'package:admin_voting/app/modules/capres/controllers/capres_controller.dart';
-import 'package:admin_voting/app/modules/dashboard/controllers/dashboard_controller.dart';
-import 'package:admin_voting/app/modules/pemilih/controllers/pemilih_controller.dart';
-import 'package:admin_voting/app/modules/statistic/controllers/statistic_controller.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:packages/packages.dart';
 
 import '../../../core/constans/constans_app.dart';
 import '../../../core/models/waktu_pemilihan.dart';
 import '../../../core/services/method.dart';
+import '../../pemilih/controllers/pemilih_controller.dart';
 
 class ControlPemController extends GetxController
     with StateMixin<List<WaktuPemModel>> {
@@ -19,10 +21,8 @@ class ControlPemController extends GetxController
   List<WaktuPemModel> listWaktuPemilihanModel = <WaktuPemModel>[];
   List<WaktuPemModel> listWaktuPemilihanAktif = <WaktuPemModel>[];
 
-  final staticticC = Get.find<StatisticController>();
-  final capresC = Get.find<CapresController>();
-  final dashC = Get.find<DashboardController>();
-  final pemilihC = Get.find<PemilihController>();
+  PemilihController? pemilihC;
+  CapresController? capresC;
 
   Stream<QuerySnapshot<Map<String, dynamic>>> get getListWaktuPemilihan =>
       ConstansApp.firestore
@@ -31,6 +31,8 @@ class ControlPemController extends GetxController
 
   @override
   void onInit() {
+    pemilihC = Get.find<PemilihController>();
+    capresC = Get.find<CapresController>();
     getListWaktuPemilihan.listen((event) {
       if (event.size != 0) {
         listWaktuPemilihanModel = List.generate(
@@ -59,15 +61,43 @@ class ControlPemController extends GetxController
     required String idWaktuPemilihan,
     required List<DataPemilihan> dataPemilihan,
   }) {
-    // update tabel waktu pemilihan
+    alertActions(
+      'into',
+      'apa anda yakin menyelesaikan pemilihan yang sedang berjalan??',
+      [
+        TextButton(
+          onPressed: () => Get.back(),
+          child: const Text('tidak'),
+        ),
+        20.sW,
+        TextButton(
+          onPressed: () => selesai(
+            idWaktuPemilihan: idWaktuPemilihan,
+            dataPemilihan: dataPemilihan,
+          ),
+          child: const Text('ya'),
+        ),
+      ],
+    );
+  }
+
+  void selesai({
+    required String idWaktuPemilihan,
+    required List<DataPemilihan> dataPemilihan,
+  }) {
+    change([], status: RxStatus.loading());
+    // update tabel waktu pemilihan sesuai id pemilihan yang sedang berjalan
+    // dan akan menonaktifkan status aktif dari waktu pemilihan
     methodApp.updateWaktuPemilihan(
       idWP: idWaktuPemilihan,
       data: {
         'isAktif': false,
       },
     );
-    final sudahMemilih = pemilihC.listSudahMemilih;
 
+    // update tabel pemilih
+    // dan akan mengubah semua status memilih menjadi belum memilih
+    final sudahMemilih = pemilihC!.listSudahMemilih;
     for (int i = 0; i < sudahMemilih.length; i++) {
       methodApp.updatePemilih(
         idPemilih: sudahMemilih[i].id!,
@@ -75,14 +105,17 @@ class ControlPemController extends GetxController
       );
     }
 
-    // final capres = capresC.listCapresModelIsPeriode;
-
-    // for (int i = 0; i < capres.length; i++) {
-    //   methodApp.updateCapres(
-    //     idCapres: capres[i].id!,
-    //     data: {'isPeriode': false},
-    //   );
-    // }
+    // update tabel capres
+    // dan akan mengubah semua status periado menjadi false
+    // artinya sudah bukan capres periode ini
+    // dan di CRUD capres sdh tidak di tampilkan
+    final capres = capresC!.listCapresModelIsPeriode;
+    for (int i = 0; i < capres.length; i++) {
+      methodApp.updateCapres(
+        idCapres: capres[i].id!,
+        data: {'isPeriode': false},
+      );
+    }
 
     // add data di tabel riwayat pemilihan
     final data = RiwayatPemModel(
@@ -93,5 +126,10 @@ class ControlPemController extends GetxController
       data: data,
     );
     change(listWaktuPemilihanModel, status: RxStatus.success());
+    Get.back();
+    alertInfo(
+      'info',
+      'pemilihan pada periode ini telah di rekap',
+    );
   }
 }

@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:packages/packages.dart';
 
+import '../components/detail_pemilih.dart';
 import '../components/form_search.dart';
 import '../components/penghuni.dart';
 import '../controllers/pemilih_controller.dart';
@@ -35,10 +36,9 @@ class PemilihView extends GetView<PemilihController> {
                 listPemilih: state,
                 index: index,
                 onTap: () {
-                  Get.toNamed(
-                    Routes.FORM_PEMILIH,
-                    arguments: dataPemilih,
-                  );
+                  Get.to(DetailPemilih(
+                    data: dataPemilih,
+                  ));
                 },
                 onLongTap: () {
                   controller.alertPemilih(dataPemilih);

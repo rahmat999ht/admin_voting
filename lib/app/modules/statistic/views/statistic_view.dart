@@ -12,6 +12,9 @@ class StatisticView extends GetView<StatisticController> {
   const StatisticView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    Get.lazyPut<ControlPemController>(
+      () => ControlPemController(),
+    );
     return Scaffold(
       appBar: AppBar(
         elevation: 0,

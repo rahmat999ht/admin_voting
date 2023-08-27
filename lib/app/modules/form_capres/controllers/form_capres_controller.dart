@@ -8,6 +8,7 @@ import 'package:packages/button/button_outline.dart';
 
 import '../../../core/constans/constans_app.dart';
 import '../../../core/interface/alerts/alert_content.dart';
+import '../../../core/interface/alerts/alert_info.dart';
 import '../../../core/models/capres.dart';
 import '../../../core/services/method.dart';
 
@@ -88,6 +89,10 @@ class FormCapresController extends GetxController {
           ).toAddImage();
           methodApp.addCapres(data: data);
           Get.back();
+          alertInfo(
+            'info',
+            'Berhasil menambahkan capres baru',
+          );
           log('masuk 1 ${dataImage.imageFileList.length}');
         } else {
           Get.snackbar('Info', "Tolong tambahkan Image");
@@ -130,6 +135,10 @@ class FormCapresController extends GetxController {
               data: data,
             );
             Get.back();
+            alertInfo(
+              'info',
+              'Berhasil mengedit capres ${cNama.text}',
+            );
             log('masuk 1 ${dataImage.imageFileList.length}');
           } else {
             final data = CapresModel(
@@ -145,6 +154,10 @@ class FormCapresController extends GetxController {
               data: data,
             );
             Get.back();
+            alertInfo(
+              'info',
+              'Berhasil mengedit capres ${cNama.text}',
+            );
           }
         }
       }

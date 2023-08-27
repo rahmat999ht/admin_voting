@@ -3,13 +3,13 @@ import 'dart:developer';
 import 'package:admin_voting/app/core/constans/constans_app.dart';
 import 'package:admin_voting/app/core/interface/alerts/alert_info.dart';
 import 'package:admin_voting/app/core/models/waktu_pemilihan.dart';
-import 'package:admin_voting/app/modules/control_pem/controllers/control_pem_controller.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 import '../../../core/services/method.dart';
+import '../../control_pem/controllers/control_pem_controller.dart';
 
 class FormAddPemController extends GetxController {
   final methodApp = MethodApp();
@@ -29,9 +29,10 @@ class FormAddPemController extends GetxController {
   }
 
   void tambahWaktuPemilihan() {
-    initLoading();
     try {
       if (formKey.currentState!.validate()) {
+        initLoading();
+
         if (dataWaktuPem.listWaktuPemilihanAktif.isNotEmpty) {
           log('tidak di izinkan');
           alertInfo('Maaf', 'Masih ada pemilihan yang berlangsung');
@@ -86,12 +87,12 @@ class FormAddPemController extends GetxController {
         jamMulaiC.clear();
         tglC.clear();
         Get.back();
+        initLoading();
       }
     } catch (e) {
       log(e.toString());
+      initLoading();
     }
-
-    initLoading();
   }
 
   Future<String> getTime(
