@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:admin_voting/app/core/models/waktu_pemilihan.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../constans/constans_app.dart';
@@ -135,6 +136,17 @@ class MethodApp {
         .withConverter(
           fromFirestore: (snapshot, options) =>
               CapresModel.fromDocumentSnapshot(snapshot),
+          toFirestore: (value, options) => value.toMap(),
+        );
+  }
+
+  DocumentReference<WaktuPemModel> waktuPem(String idCapres) {
+    return ConstansApp.firestore
+        .collection(ConstansApp.waktuPemilihanCollection)
+        .doc(idCapres)
+        .withConverter(
+          fromFirestore: (snapshot, options) =>
+              WaktuPemModel.fromDocumentSnapshot(snapshot),
           toFirestore: (value, options) => value.toMap(),
         );
   }

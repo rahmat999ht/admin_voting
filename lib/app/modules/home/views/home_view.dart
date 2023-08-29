@@ -28,7 +28,7 @@ class HomeView extends GetView<HomeController> {
       body: controller.obx(
         (state) {
           state!.sort(
-            (a, b) => a.periodeTahun.compareTo(b.periodeTahun),
+            (a, b) => a.createAt.compareTo(b.createAt),
           );
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -80,7 +80,7 @@ class HomeView extends GetView<HomeController> {
   }
 
   Row pemilihanTerakhir(RiwayatPemModel pemilihanTerakhir) {
-    final toDate = pemilihanTerakhir.periodeTahun.toDate();
+    final toDate = pemilihanTerakhir.createAt.toDate();
     String tanggal = DateFormat('dd MMMM yyyy', "id_ID").format(toDate);
 
     return Row(
@@ -148,7 +148,7 @@ class RiwayatPemilihan extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     listData.sort(
-      (a, b) => a.periodeTahun.compareTo(b.periodeTahun),
+      (a, b) => b.createAt.compareTo(a.createAt),
     );
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -182,11 +182,11 @@ class RiwayatPemilihan extends GetView<HomeController> {
                 ) {
                   MethodApp methodApp = MethodApp();
                   final RiwayatPemModel data = listData[index];
-                  final periode = data.periodeTahun.toDate();
+                  // final createAtt = data.createAt.toDate();
 
                   // String jam = DateFormat("HH : mm", "id_ID").format(periode);
-                  String tanggal =
-                      DateFormat('dd MMMM yyyy', "id_ID").format(periode);
+                  // String tanggal =
+                  //     DateFormat('dd MMMM yyyy', "id_ID").format(createAtt);
 
                   int maxTotalPemilih = -1;
                   int maxIndex = -1;
@@ -208,44 +208,53 @@ class RiwayatPemilihan extends GetView<HomeController> {
                       builder: (ctx, s) {
                         if (s.hasData) {
                           log(s.data!.toString(), name: 'capres');
-
                           final dataCapresTerpilih = s.data!.data()!;
-
-                          return ListTile(
-                            title: Text(
-                              dataCapresTerpilih.nama!,
-                            ),
-                            subtitle: const Text(
-                              'Bem terpilih',
-                            ),
-                            leading: ClipOval(
-                              child: dataCapresTerpilih.foto == null
-                                  ? const SizedBox(height: 30)
-                                  : Image.network(
-                                      dataCapresTerpilih.foto!,
-                                      height: 40,
-                                      width: 40,
-                                      fit: BoxFit.cover,
-                                    ),
-                            ),
-                            trailing: Text(tanggal),
+                          return StreamBuilder(
+                            stream: methodApp
+                                .waktuPem(data.periodeTahun.id)
+                                .snapshots(),
+                            builder: (context, snapshot) {
+                              if (snapshot.hasData) {
+                                final dataWaktuPem = snapshot.data!.data();
+                                log('data dataWaktuPem : $dataWaktuPem');
+                                log('data idWaktuPem : ${data.periodeTahun.id}');
+                                return ListTile(
+                                  onTap: () {
+                                    // Get.to(page)
+                                  },
+                                  title: Text(
+                                    dataCapresTerpilih.nama!,
+                                  ),
+                                  subtitle: const Text(
+                                    'Bem terpilih',
+                                  ),
+                                  leading: ClipOval(
+                                    child: dataCapresTerpilih.foto == null
+                                        ? const SizedBox(height: 30)
+                                        : Image.network(
+                                            dataCapresTerpilih.foto!,
+                                            height: 40,
+                                            width: 40,
+                                            fit: BoxFit.cover,
+                                          ),
+                                  ),
+                                  trailing: Text(dataWaktuPem!.periode),
+                                );
+                              } else {
+                                return const LoadingState();
+                              }
+                            },
                           );
                         } else if (s.connectionState ==
                             ConnectionState.waiting) {
-                          return const Center(
-                            child: CircularProgressIndicator(),
-                          );
+                          return const LoadingState();
                         } else {
-                          return const Text(
-                            'Tidak ada data',
-                          );
+                          return const EmptyState();
                         }
                       },
                     );
                   } else {
-                    return const Text(
-                      'Tidak ada data',
-                    );
+                    return const EmptyState();
                   }
                 },
               ),

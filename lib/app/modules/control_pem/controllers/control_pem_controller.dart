@@ -118,8 +118,10 @@ class ControlPemController extends GetxController
     }
 
     // add data di tabel riwayat pemilihan
+    final docWaltuPem = methodApp.waktuPem(idWaktuPemilihan);
     final data = RiwayatPemModel(
-      periodeTahun: Timestamp.now(),
+      createAt: Timestamp.now(),
+      periodeTahun: docWaltuPem,
       dataPemilihan: dataPemilihan,
     ).toMap();
     methodApp.addRiwayatPemilihan(
