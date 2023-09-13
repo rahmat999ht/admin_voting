@@ -99,7 +99,7 @@ class CardStatistik extends GetView<PemilihController> {
 
       listPemilihCapres.add(
         PemilihCapresModel(
-          noUrut: 'Belum Memilih',
+          noUrut: 'belum dipilih kodong',
           bykPemilih: belumMemilih,
           persen: persenanBelumMemilih,
         ),

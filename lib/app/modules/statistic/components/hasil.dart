@@ -42,7 +42,7 @@ class HasilAkhir extends GetView<StatisticController> {
       (state) {
         return controller.controllerCapres.obx(
           (stateCapres) {
-            // variabel patokan = total pemilih aktif
+            // variabel patokan total pemilih aktif
             final totalPemilih =
                 controller.controllerPemilih.listPemilihAktif.length;
             final listPemilihCapres = <CapresTerpilihModel>[];
@@ -54,13 +54,13 @@ class HasilAkhir extends GetView<StatisticController> {
               final stringPersen = '${persen.toStringAsFixed(2)}%';
               log('dataPemilihanCapres $dataPemilihanCapres');
               log('listPemilihCapres $listPemilihCapres');
-              // variabel patokan = total suara kandidat
+              // variabel patokan total suara kandidat
               final totalSuaraCapres = dataPemilihanCapres.length;
-              // variabel patokan = total nilai penggali
+              // variabel patokan total nilai penggali
               // yang di dapatkan berdarakan rumus nilai penggali
               final nilaiPengaliCapres =
                   (totalPemilih + 1) / (totalSuaraCapres + 1);
-              // variabel patokan = total nilai validasi
+              // variabel patokan total nilai validasi
               // yang di dapatkan berdarakan rumus nilai validasi
               final nilaiValidasiCapres =
                   (totalSuaraCapres * nilaiPengaliCapres) / (totalPemilih);
