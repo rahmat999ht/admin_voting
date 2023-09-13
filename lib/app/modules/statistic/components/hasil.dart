@@ -125,7 +125,7 @@ class HasilAkhir extends GetView<StatisticController> {
                       ),
                       12.sH,
                       Text(
-                        "Dengan nilai Penggali : ${data.nilaiPengali}",
+                        "Dengan nilai Pengali : ${data.nilaiPengali}",
                         style: const TextStyle(fontSize: 18),
                       ),
                       12.sH,
