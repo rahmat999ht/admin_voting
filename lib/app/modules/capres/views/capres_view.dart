@@ -24,16 +24,18 @@ class CapresView extends GetView<CapresController> {
       ),
       body: controller.obx(
         (state) {
+          final listCapresIsPeriode =
+            state!.where((e) => e.isPeriode == true).toList();
           return ListView.builder(
             shrinkWrap: true,
-            itemCount: state!.length,
+            itemCount: listCapresIsPeriode.length,
             itemBuilder: (
               context,
               index,
             ) {
-              final CapresModel dataCapres = state[index];
+              final CapresModel dataCapres = listCapresIsPeriode[index];
               return Capres(
-                listCapres: state,
+                listCapres: listCapresIsPeriode,
                 index: index,
                 onTap: () {
                   Get.to(

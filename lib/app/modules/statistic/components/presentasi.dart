@@ -22,7 +22,9 @@ class Presentasi extends GetView<StatisticController> {
         (state) {
           // int totalPemilih = 20;
           return controller.controllerCapres.obx(
-            (stateHome) {
+            (stateCapres) {
+              final stateHome =
+            stateCapres!.where((e) => e.isPeriode == true).toList();
               final totalPemilih =
                   controller.controllerPemilih.listPemilihAktif.length;
               final listPemilihCapres = <PemilihCapresModel>[];

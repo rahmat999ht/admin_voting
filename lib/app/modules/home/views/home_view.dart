@@ -204,18 +204,18 @@ class RiwayatPemilihan extends GetView<HomeController> {
 
                   int maxTotalPemilih = -1;
                   int maxIndex = -1;
-
-                  for (int i = 0; i < data.dataPemilihan.length; i++) {
+                   for (int i = 0; i < data.dataPemilihan.length; i++) {
                     if (data.dataPemilihan[i].totalPemilih > maxTotalPemilih) {
                       maxTotalPemilih = data.dataPemilihan[i].totalPemilih;
                       maxIndex = i;
                     }
                   }
+
                   if (maxIndex != -1) {
+                   
                     final dataCapres = data.dataPemilihan[maxIndex];
                     log(maxIndex.toString(), name: 'maxIndex');
                     log(dataCapres.idCapres.id.toString(), name: 'capres');
-
                     return StreamBuilder(
                       stream:
                           methodApp.capres(dataCapres.idCapres.id).snapshots(),
@@ -259,16 +259,16 @@ class RiwayatPemilihan extends GetView<HomeController> {
                               }
                             },
                           );
-                        } else if (s.connectionState ==
-                            ConnectionState.waiting) {
-                          return const LoadingState();
+                        // } else if (s.connectionState ==
+                        //     ConnectionState.waiting) {
+                        //   return const LoadingState();
                         } else {
                           return const EmptyState();
                         }
                       },
                     );
                   } else {
-                    return const EmptyState();
+                    return const SizedBox();
                   }
                 },
               ),

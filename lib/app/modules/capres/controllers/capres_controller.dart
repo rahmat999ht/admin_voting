@@ -86,7 +86,7 @@ class CapresController extends GetxController
             listCapresModel.where((e) => e.isPeriode == true).toList();
         lengthCapres = listCapresModelIsPeriode.length;
         log('${listCapresModel.length}', name: 'Capres');
-        change(listCapresModelIsPeriode, status: RxStatus.success());
+        change(listCapresModel, status: RxStatus.success());
       } else {
         log('Kosong', name: 'Capres');
         change([], status: RxStatus.empty());
