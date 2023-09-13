@@ -105,6 +105,42 @@ class FormPemilihController extends GetxController {
               Get.back();
             },
           ),
+           ButtonOutline(
+            text: 'Rekayasa Perangkat Lunak',
+            colorBorder: Colors.black87,
+            fontColor: Colors.black87,
+            onPressed: () {
+              cProdi.text = 'Rekayasa Perangkat Lunak';
+              Get.back();
+            },
+          ),
+          ButtonOutline(
+            text: 'Bisnis Digital',
+            colorBorder: Colors.black87,
+            fontColor: Colors.black87,
+            onPressed: () {
+              cProdi.text = 'Bisnis Digital';
+              Get.back();
+            },
+          ),
+          ButtonOutline(
+            text: 'Kewirausahaan',
+            colorBorder: Colors.black87,
+            fontColor: Colors.black87,
+            onPressed: () {
+              cProdi.text = 'Kewirausahaan';
+              Get.back();
+            },
+          ),
+          ButtonOutline(
+            text: 'Menejemen Informatika',
+            colorBorder: Colors.black87,
+            fontColor: Colors.black87,
+            onPressed: () {
+              cProdi.text = 'Menejemen Informatika';
+              Get.back();
+            },
+          ),
         ],
       ),
     );

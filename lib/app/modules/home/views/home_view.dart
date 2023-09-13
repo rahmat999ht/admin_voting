@@ -44,7 +44,16 @@ class HomeView extends GetView<HomeController> {
             ],
           );
         },
-        onEmpty: const EmptyState(),
+        onEmpty: Column(
+          children: [
+            20.sH,
+            pemilihanTerakhir(null),
+            20.sH,
+            cardAction(),
+            20.sH,
+            const EmptyState(),
+          ],
+        ),
         onLoading: const LoadingState(),
         onError: (e) => ErrorState(error: e!),
       ),
@@ -79,9 +88,14 @@ class HomeView extends GetView<HomeController> {
     ];
   }
 
-  Row pemilihanTerakhir(RiwayatPemModel pemilihanTerakhir) {
-    final toDate = pemilihanTerakhir.createAt.toDate();
-    String tanggal = DateFormat('dd MMMM yyyy', "id_ID").format(toDate);
+  Row pemilihanTerakhir(RiwayatPemModel? pemilihanTerakhir) {
+    String tanggal = '';
+    if (pemilihanTerakhir == null) {
+      tanggal = '-';
+    } else {
+      final toDate = pemilihanTerakhir.createAt.toDate();
+      tanggal = DateFormat('dd MMMM yyyy', "id_ID").format(toDate);
+    }
 
     return Row(
       children: [
