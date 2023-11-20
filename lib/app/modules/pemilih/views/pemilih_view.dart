@@ -1,9 +1,7 @@
 import 'package:admin_voting/app/core/colors/colors_app.dart';
 import 'package:admin_voting/app/core/models/pemilih.dart';
-import 'package:admin_voting/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:line_icons/line_icons.dart';
 import 'package:packages/packages.dart';
 
 import '../components/detail_pemilih.dart';
@@ -54,18 +52,18 @@ class PemilihView extends GetView<PemilihController> {
         onLoading: const LoadingState(),
         onError: (e) => ErrorState(error: e!),
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          Get.toNamed(Routes.FORM_PEMILIH);
-        },
-        label: Row(
-          children: [
-            const Icon(LineIcons.plus),
-            8.sW,
-            const Text('Pemilih'),
-          ],
-        ),
-      ),
+      // floatingActionButton: FloatingActionButton.extended(
+      //   onPressed: () {
+      //     Get.toNamed(Routes.FORM_PEMILIH);
+      //   },
+      //   label: Row(
+      //     children: [
+      //       const Icon(LineIcons.plus),
+      //       8.sW,
+      //       const Text('Pemilih'),
+      //     ],
+      //   ),
+      // ),
     );
   }
 }
