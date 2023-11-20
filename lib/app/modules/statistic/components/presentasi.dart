@@ -24,11 +24,11 @@ class Presentasi extends GetView<StatisticController> {
           return controller.controllerCapres.obx(
             (stateCapres) {
               final stateHome =
-            stateCapres!.where((e) => e.isPeriode == true).toList();
+                  stateCapres!.where((e) => e.isPeriode == true).toList();
               final totalPemilih =
                   controller.controllerPemilih.listPemilihAktif.length;
               final listPemilihCapres = <PemilihCapresModel>[];
-              for (int index = 0; index < stateHome!.length; index++) {
+              for (int index = 0; index < stateHome.length; index++) {
                 final dataPemilihanCapres = state!
                     .where((e) => e.capres!.id == stateHome[index].id)
                     .toList();
