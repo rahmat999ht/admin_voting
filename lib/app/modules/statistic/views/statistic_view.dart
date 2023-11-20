@@ -15,6 +15,9 @@ class StatisticView extends GetView<StatisticController> {
     Get.lazyPut<ControlPemController>(
       () => ControlPemController(),
     );
+    Get.lazyPut<StatisticController>(
+      () => StatisticController(),
+    );
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
