@@ -30,7 +30,7 @@ class DetailPemilih extends StatelessWidget {
               );
             },
           ),
-          20.sW
+          20.sW,
         ],
       ),
       body: SingleChildScrollView(
@@ -48,18 +48,6 @@ class DetailPemilih extends StatelessWidget {
                 title: const Text('STB :'),
                 subtitle:
                     Text('${data.stb}', style: const TextStyle(fontSize: 16)),
-              ),
-              const Divider(),
-              ListTile(
-                title: const Text('Jenis kelamin :'),
-                subtitle:
-                    Text('${data.jkl}', style: const TextStyle(fontSize: 16)),
-              ),
-              const Divider(),
-              ListTile(
-                title: const Text('Jurusan :'),
-                subtitle:
-                    Text('${data.prody}', style: const TextStyle(fontSize: 16)),
               ),
             ],
           ),

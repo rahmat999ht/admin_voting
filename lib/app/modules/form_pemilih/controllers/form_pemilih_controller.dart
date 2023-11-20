@@ -27,8 +27,6 @@ class FormPemilihController extends GetxController {
     final data = PemilihModel(
       stb: int.parse(cStb.text),
       nama: cNama.text,
-      jkl: cJkl.text,
-      prody: cProdi.text,
       pass: 'm${cStb.text}',
       isAktif: true,
       isMemilih: false,
@@ -43,8 +41,6 @@ class FormPemilihController extends GetxController {
     final data = PemilihModel(
       stb: int.parse(cStb.text),
       nama: cNama.text,
-      jkl: cJkl.text,
-      prody: cProdi.text,
     ).toUpdate();
     methodApp.updatePemilih(
       idPemilih: id,
@@ -105,7 +101,7 @@ class FormPemilihController extends GetxController {
               Get.back();
             },
           ),
-           ButtonOutline(
+          ButtonOutline(
             text: 'Rekayasa Perangkat Lunak',
             colorBorder: Colors.black87,
             fontColor: Colors.black87,
@@ -159,8 +155,6 @@ class FormPemilihController extends GetxController {
       dataPemilih = Get.arguments;
       cNama.text = dataPemilih!.nama!;
       cStb.text = dataPemilih!.stb.toString();
-      cJkl.text = dataPemilih!.jkl!;
-      cProdi.text = dataPemilih!.prody!;
     }
     super.onInit();
   }
