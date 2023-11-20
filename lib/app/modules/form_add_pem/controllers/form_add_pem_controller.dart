@@ -32,62 +32,64 @@ class FormAddPemController extends GetxController {
     try {
       if (formKey.currentState!.validate()) {
         initLoading();
+        if (dataWaktuPem.listWaktuPemilihanModel.isNotEmpty) {
+          log('masuk');
+          // Konversi jamMulaiText ke dalam format DateTime
+          TimeOfDay jamMulai = TimeOfDay(
+            hour: int.parse(jamMulaiC.text.split(':')[0]),
+            minute: int.parse(jamMulaiC.text.split(':')[1]),
+          );
 
-        if (dataWaktuPem.listWaktuPemilihanAktif.isNotEmpty) {
-          log('tidak di izinkan');
-          alertInfo('Maaf', 'Masih ada pemilihan yang berlangsung');
+          TimeOfDay jamBerakhir = TimeOfDay(
+            hour: int.parse(jamBerakhirC.text.split(':')[0]),
+            minute: int.parse(jamBerakhirC.text.split(':')[1]),
+          );
+
+          DateFormat inputFormat = DateFormat("dd MMMM yyyy", "id_ID");
+          DateTime tanggal = inputFormat.parse(tglC.text);
+
+          // Gabungkan tanggal dan waktu menjadi satu DateTime
+          DateTime tglMulai = DateTime(
+            tanggal.year,
+            tanggal.month,
+            tanggal.day,
+            jamMulai.hour,
+            jamMulai.minute,
+          );
+          DateTime tglBerakhir = DateTime(
+            tanggal.year,
+            tanggal.month,
+            tanggal.day,
+            jamBerakhir.hour,
+            jamBerakhir.minute,
+          );
+
+          // Konversi DateTime menjadi Timestamp
+          Timestamp tsTglMulai = Timestamp.fromDate(tglMulai);
+          Timestamp tsTglBerakhir = Timestamp.fromDate(tglBerakhir);
+          final mulai = (date.year).toString();
+          final berakhir = (date.year + 1).toString();
+          final data = WaktuPemModel(
+            periode: "$mulai - $berakhir",
+            isAktif: true,
+            waktuMulai: tsTglMulai,
+            waktuSelesai: tsTglBerakhir,
+          ).toMap();
+          methodApp.addWaktuPemilihan(data: data);
+          // log(data.toString());
+          jamBerakhirC.clear();
+          jamMulaiC.clear();
+          tglC.clear();
+          Get.back();
           initLoading();
-          return;
+        } else {
+          if (dataWaktuPem.listWaktuPemilihanAktif.isNotEmpty) {
+            log('tidak di izinkan');
+            alertInfo('Maaf', 'Masih ada pemilihan yang berlangsung');
+            initLoading();
+            return;
+          }
         }
-        log('masuk');
-        // Konversi jamMulaiText ke dalam format DateTime
-        TimeOfDay jamMulai = TimeOfDay(
-          hour: int.parse(jamMulaiC.text.split(':')[0]),
-          minute: int.parse(jamMulaiC.text.split(':')[1]),
-        );
-
-        TimeOfDay jamBerakhir = TimeOfDay(
-          hour: int.parse(jamBerakhirC.text.split(':')[0]),
-          minute: int.parse(jamBerakhirC.text.split(':')[1]),
-        );
-
-        DateFormat inputFormat = DateFormat("dd MMMM yyyy", "id_ID");
-        DateTime tanggal = inputFormat.parse(tglC.text);
-
-        // Gabungkan tanggal dan waktu menjadi satu DateTime
-        DateTime tglMulai = DateTime(
-          tanggal.year,
-          tanggal.month,
-          tanggal.day,
-          jamMulai.hour,
-          jamMulai.minute,
-        );
-        DateTime tglBerakhir = DateTime(
-          tanggal.year,
-          tanggal.month,
-          tanggal.day,
-          jamBerakhir.hour,
-          jamBerakhir.minute,
-        );
-
-        // Konversi DateTime menjadi Timestamp
-        Timestamp tsTglMulai = Timestamp.fromDate(tglMulai);
-        Timestamp tsTglBerakhir = Timestamp.fromDate(tglBerakhir);
-        final mulai = (date.year).toString();
-        final berakhir = (date.year + 1).toString();
-        final data = WaktuPemModel(
-          periode: "$mulai - $berakhir",
-          isAktif: true,
-          waktuMulai: tsTglMulai,
-          waktuSelesai: tsTglBerakhir,
-        ).toMap();
-        methodApp.addWaktuPemilihan(data: data);
-        // log(data.toString());
-        jamBerakhirC.clear();
-        jamMulaiC.clear();
-        tglC.clear();
-        Get.back();
-        initLoading();
       }
     } catch (e) {
       log(e.toString());

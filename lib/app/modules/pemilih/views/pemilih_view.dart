@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:packages/packages.dart';
 
-import '../components/detail_pemilih.dart';
 import '../components/form_search.dart';
 import '../components/penghuni.dart';
 import '../controllers/pemilih_controller.dart';
@@ -34,13 +33,12 @@ class PemilihView extends GetView<PemilihController> {
                 listPemilih: state,
                 index: index,
                 onTap: () {
-                  Get.to(DetailPemilih(
-                    data: dataPemilih,
-                  ));
-                },
-                onLongTap: () {
+                  // Get.to(DetailPemilih(
+                  //   data: dataPemilih,
+                  // ));
                   controller.alertPemilih(dataPemilih);
                 },
+                onLongTap: () {},
                 onTapDelete: () {
                   controller.alertDeletePemilih(dataPemilih);
                 },
